@@ -1,0 +1,14 @@
+[global]
+evaluate_every = 1000
+save_plot_every = 1000
+evaluate_num = 100
+# episode_num = 10000000
+episode_num = 102
+
+# Set the the number of steps for collecting normalization statistics
+# and intial memory size
+memory_init_size = 1000
+norm_step = 1000
+
+nr_players = 4
+nr_cards=55
