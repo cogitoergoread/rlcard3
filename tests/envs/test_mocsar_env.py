@@ -4,7 +4,7 @@ Test cases copied from tests/unittest/envs/test_uno_env.py
 import pytest
 import numpy as np
 from pytest_steps import test_steps
-
+import random
 from rlcard.envs.mocsar import MocsarEnv as Env
 from rlcard.agents.random_agent import RandomAgent
 
@@ -29,9 +29,9 @@ def test_init_game_and_extract_state():
 
 def test_get_legal_actions():
     env = Env(config=config)
-    env.set_agents([RandomAgent(), RandomAgent()])
+    env.set_agents([RandomAgent(action_num=env.action_num), RandomAgent(action_num=env.action_num)])
     env.init_game()
-    legal_actions = env.get_legal_actions()
+    legal_actions = env._get_legal_actions()
     for legal_action in legal_actions:
         assert legal_action <= env.game.get_action_num()
 
@@ -46,6 +46,9 @@ def test_step():
 
 
 def test_step_back_enabled():
+    random.seed = 42
+    np.random.seed(42)
+    config['allow_step_back'] = True
     env = Env(config=config)
     state_before, player_id_before = env.init_game()
     action = np.random.choice(state_before['legal_actions'])
@@ -56,9 +59,11 @@ def test_step_back_enabled():
 
 
 def test_step_back_disabled():
+    random.seed = 42
+    np.random.seed(42)
     env = Env(config=config)
     state, player_id = env.init_game()
-    action = np.random.choice(state['legal_actions'])
+    action = np.random.choice(state['legal_actions']) # TODO itt meg kellene nézni, milyen actionö vannak.
     env.step(action)
 
     with pytest.raises(Exception) as excinfo:
@@ -70,8 +75,11 @@ def test_step_back_disabled():
 @test_steps('Training', 'NotTraining')
 def test_run():
     env = Env(config=config)
-    env.set_agents([RandomAgent(), RandomAgent(), RandomAgent(), RandomAgent()])
-    trajectories, payoffs = env.run(is_training=False)
+    env.set_agents([RandomAgent(action_num=env.action_num),
+                    RandomAgent(action_num=env.action_num),
+                    RandomAgent(action_num=env.action_num),
+                    RandomAgent(action_num=env.action_num)])
+    trajectories, payoffs = env.run(is_training=False, seed=42)
     assert len(trajectories) == 4  # There are four players
     total = 0
     for payoff in payoffs:
