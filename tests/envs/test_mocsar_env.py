@@ -51,9 +51,11 @@ def test_step_back_enabled():
     config['allow_step_back'] = True
     env = Env(config=config)
     state_before, player_id_before = env.init_game()
-    action = np.random.choice(state_before['legal_actions'])
-    env.step(action)
+
+    # print(state_before, player_id_before)
+    env.step(state_before['legal_actions'][0])
     state, player_id = env.step_back()
+    # print(state, player_id )
     assert player_id == player_id_before
     assert np.array_equal(state['obs'], state_before['obs'])
 
@@ -63,7 +65,9 @@ def test_step_back_disabled():
     np.random.seed(42)
     env = Env(config=config)
     state, player_id = env.init_game()
-    action = np.random.choice(state['legal_actions']) # TODO itt meg kellene nézni, milyen actionö vannak.
+    legal_actions = state['legal_actions']
+    # print(f"LegalActions{legal_actions}")
+    action = legal_actions[0]
     env.step(action)
 
     with pytest.raises(Exception) as excinfo:
