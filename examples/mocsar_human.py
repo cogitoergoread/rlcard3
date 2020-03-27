@@ -7,7 +7,7 @@ import rlcard
 env = rlcard.make(env_id='mocsar', config={'human_mode': True})
 
 # Reset environment
-state = env.reset()  # TODO ez még nem fut
+state = env.reset()
 
 while not env.is_over():
     legal_actions = state['legal_actions']
