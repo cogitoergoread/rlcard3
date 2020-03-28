@@ -1,4 +1,6 @@
-""" A toy example of playing against random bot on Mocsár
+"""
+A toy example of playing against random bot on Mocsár
+Using env "mocsar" and 'human_mode'. It implies using random agent.
 """
 
 import rlcard
