@@ -30,7 +30,7 @@ eval_env.game.set_game_params(
 
 # Set the iterations numbers and how frequently we evaluate/save plot
 evaluate_num = conf.get_int('evaluate_num')
-
+evaluate_every = conf.get_int('evaluate_every')
 # Set the the number of steps for collecting normalization statistics
 # and intial memory size
 memory_init_size = conf.get_int('memory_init_size')
@@ -81,9 +81,16 @@ with tf.compat.v1.Session() as sess:
             agent.feed(ts)
 
         # Evaluate the performance. Play with random agents.
-        if episode % conf.get_int('evaluate_every') == 0:  # Save Model
+        print(f"Episode:{episode}")
+        if episode % evaluate_every == 0:  # Save Model
+            print("Performance")
             logger.log_performance(env.timestep, tournament(eval_env, evaluate_num)[0], episode=episode)
 
+    # Close files in the logger
+    logger.close_files()
+
+    # Plot the learning curve
+    logger.plot('DQN')
 
     # Save model
     save_dir = 'models/mocsar_dqn'
