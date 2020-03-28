@@ -84,12 +84,10 @@ with tf.compat.v1.Session() as sess:
         trajectories, _ = env.run(is_training=True)
 
         # Feed transitions into agent memory, and train the agent
-        print(f"Episode:{episode}")
         for ts in trajectories[0]:
             agent.feed(ts)
         # Evaluate the performance. Play with random agents.
         if episode % evaluate_every == 0:
-            print("Performance")
             logger.log_performance(env.timestep, tournament(eval_env, evaluate_num)[0], episode=episode)
 
     # Close files in the logger

@@ -81,9 +81,7 @@ with tf.compat.v1.Session() as sess:
             agent.feed(ts)
 
         # Evaluate the performance. Play with random agents.
-        print(f"Episode:{episode}")
         if episode % evaluate_every == 0:  # Save Model
-            print("Performance")
             logger.log_performance(env.timestep, tournament(eval_env, evaluate_num)[0], episode=episode)
 
     # Close files in the logger
