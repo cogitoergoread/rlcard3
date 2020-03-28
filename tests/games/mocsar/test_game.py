@@ -1,8 +1,8 @@
 from random import seed
 import pytest
 from pytest_steps import test_steps
-from rlcard.games.mocsar.game import MocsarGame as Game
-from rlcard.games.mocsar.utils import card_list_to_str
+from rlcard3.games.mocsar.game import MocsarGame as Game
+from rlcard3.games.mocsar.utils import card_list_to_str
 
 
 def test_init_game():

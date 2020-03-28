@@ -2,15 +2,15 @@
 '''
 import numpy as np
 
-import rlcard
-from rlcard.agents.cfr_agent import CFRAgent
-from rlcard import models
-from rlcard.utils.utils import set_global_seed, tournament
-from rlcard.utils.logger import Logger
+import rlcard3
+from rlcard3.agents.cfr_agent import CFRAgent
+from rlcard3 import models
+from rlcard3.utils.utils import set_global_seed, tournament
+from rlcard3.utils.logger import Logger
 
 # Make environment and enable human mode
-env = rlcard.make('leduc-holdem', config={'allow_step_back':True})
-eval_env = rlcard.make('leduc-holdem')
+env = rlcard3.make('leduc-holdem', config={'allow_step_back':True})
+eval_env = rlcard3.make('leduc-holdem')
 
 # Set the iterations numbers and how frequently we evaluate the performance and save model
 evaluate_every = 100

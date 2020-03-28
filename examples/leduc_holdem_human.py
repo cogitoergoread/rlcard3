@@ -1,14 +1,14 @@
 ''' A toy example of playing against pretrianed AI on Leduc Hold'em
 '''
 
-import rlcard
-from rlcard import models
-from rlcard.agents.leduc_holdem_human_agent import HumanAgent
-from rlcard.utils.utils import print_card
+import rlcard3
+from rlcard3 import models
+from rlcard3.agents.leduc_holdem_human_agent import HumanAgent
+from rlcard3.utils.utils import print_card
 
 # Make environment and enable human mode
 # Set 'record_action' to True because we need it to print results
-env = rlcard.make('leduc-holdem', config={'record_action': True})
+env = rlcard3.make('leduc-holdem', config={'record_action': True})
 human_agent = HumanAgent(env.action_num)
 cfr_agent = models.load('leduc-holdem-cfr').agents[0]
 env.set_agents([human_agent, cfr_agent])

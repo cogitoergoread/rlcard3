@@ -3,7 +3,7 @@ Test functions for mocsar_min_agent
 """
 import pytest
 
-from rlcard.model_agents.mocsar_min_agent import MocsarMinAgent
+from rlcard3.model_agents.mocsar_min_agent import MocsarMinAgent
 
 min_agent_extr_test_data = [
     pytest.param([0], 0, id="0"),

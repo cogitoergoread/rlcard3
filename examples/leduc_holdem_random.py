@@ -1,12 +1,12 @@
 ''' An example of playing Leduc Hold'em with random agents
 '''
 
-import rlcard
-from rlcard.agents.random_agent import RandomAgent
-from rlcard.utils.utils import *
+import rlcard3
+from rlcard3.agents.random_agent import RandomAgent
+from rlcard3.utils.utils import *
 
 # Make environment
-env = rlcard.make('leduc-holdem')
+env = rlcard3.make('leduc-holdem')
 episode_num = 2
 
 # Set a global seed

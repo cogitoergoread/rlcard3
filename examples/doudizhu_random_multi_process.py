@@ -1,9 +1,9 @@
 import time
 import multiprocessing
 
-import rlcard
-from rlcard.agents.random_agent import RandomAgent
-from rlcard.utils.utils import set_global_seed, assign_task
+import rlcard3
+from rlcard3.agents.random_agent import RandomAgent
+from rlcard3.utils.utils import set_global_seed, assign_task
 
 if __name__ == '__main__':
     # Timer start
@@ -23,7 +23,7 @@ if __name__ == '__main__':
 
     # Set game and make environment
     game = 'doudizhu'
-    env = rlcard.make(game)
+    env = rlcard3.make(game)
 
     # Set global seed
     set_global_seed(1)

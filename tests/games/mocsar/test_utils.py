@@ -3,11 +3,11 @@ from typing import List
 import numpy as np
 import pytest
 
-from rlcard.games.mocsar.action import Action
-from rlcard.games.mocsar.utils import all_legal_actions, overtrump_legal_actions, \
+from rlcard3.games.mocsar.action import Action
+from rlcard3.games.mocsar.utils import all_legal_actions, overtrump_legal_actions, \
     get_card_indeces, action_to_string, string_to_action, encode_cards, str_to_card_list, card_list_to_str, \
     payoff_func, encode_to_obs, decode_obs, encode_round, decode_round, get_nr_cards
-from rlcard.games.mocsar.card import MocsarCard as Card, Ertekek
+from rlcard3.games.mocsar.card import MocsarCard as Card, Ertekek
 
 
 @pytest.mark.parametrize('deck, action', [

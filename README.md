@@ -51,10 +51,10 @@ If you meet any problems when installing PyTorch with the command above, you may
 Please refer to [examples/](examples). A **short example** is as below.
 
 ```python
-import rlcard
-from rlcard.agents.random_agent import RandomAgent
+import rlcard3
+from rlcard3.agents.random_agent import RandomAgent
 
-env = rlcard.make('blackjack')
+env = rlcard3.make('blackjack')
 env.set_agents([RandomAgent(action_num=env.action_num)])
 
 trajectories, payoffs = env.run()
@@ -135,10 +135,10 @@ The purposes of the main modules are listed as below:
 *   [/examples](examples): Examples of using RLCard.
 *   [/docs](docs): Documentation of RLCard.
 *   [/tests](tests): Testing scripts for RLCard.
-*   [/rlcard/agents](rlcard/agents): Reinforcement learning algorithms and human agents.
-*   [/rlcard/envs](rlcard/envs): Environment wrappers (state representation, action encoding etc.)
-*   [/rlcard/games](rlcard/games): Various game engines.
-*   [/rlcard/models](rlcard/models): Model zoo including pre-trained models and rule models.
+*   [/rlcard/agents](rlcard3/agents): Reinforcement learning algorithms and human agents.
+*   [/rlcard/envs](rlcard3/envs): Environment wrappers (state representation, action encoding etc.)
+*   [/rlcard/games](rlcard3/games): Various game engines.
+*   [/rlcard/models](rlcard3/models): Model zoo including pre-trained models and rule models.
 
 ## API Cheat Sheet
 *   **rlcard.make(env_id, config={})**: Make an environment. `env_id` is a string of a environment; `config` is a dictionary specifying some environment configurations, which are as follows.

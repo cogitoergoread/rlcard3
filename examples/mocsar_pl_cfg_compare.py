@@ -3,13 +3,13 @@ Compare different set of bots
 Repeat random games for defined players and sums the points received.
 """
 
-import rlcard
-from rlcard.games.mocsar.stat import MocsarStat
+import rlcard3
+from rlcard3.games.mocsar.stat import MocsarStat
 
 NR_GAMES = 500
 
 # Make environment and enable human mode
-env = rlcard.make('mocsar-cfg', config={'multi_agent_mode': True})
+env = rlcard3.make('mocsar-cfg', config={'multi_agent_mode': True})
 
 # Create statistics
 stat = MocsarStat(game=env.game, agents=env.model.rule_agents, nr_of_games=NR_GAMES, batch_name="3RAS_RAMI")

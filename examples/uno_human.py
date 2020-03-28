@@ -1,13 +1,13 @@
 ''' A toy example of playing against rule-based bot on UNO
 '''
 
-import rlcard
-from rlcard import models
-from rlcard.agents.uno_human_agent import HumanAgent, _print_action
+import rlcard3
+from rlcard3 import models
+from rlcard3.agents.uno_human_agent import HumanAgent, _print_action
 
 # Make environment and enable human mode
 # Set 'record_action' to True because we need it to print results
-env = rlcard.make('uno', config={'record_action': True})
+env = rlcard3.make('uno', config={'record_action': True})
 human_agent = HumanAgent(env.action_num)
 cfr_agent = models.load('uno-rule-v1').agents[0]
 env.set_agents([human_agent, cfr_agent])

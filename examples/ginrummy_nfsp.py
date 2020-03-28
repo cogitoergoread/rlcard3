@@ -3,17 +3,17 @@
 
 import tensorflow as tf
 
-import rlcard
-from rlcard.agents.nfsp_agent import NFSPAgent
-from rlcard.agents.random_agent import RandomAgent
-from rlcard.utils.utils import set_global_seed, tournament
-from rlcard.utils.logger import Logger
+import rlcard3
+from rlcard3.agents.nfsp_agent import NFSPAgent
+from rlcard3.agents.random_agent import RandomAgent
+from rlcard3.utils.utils import set_global_seed, tournament
+from rlcard3.utils.logger import Logger
 
-from rlcard.games.gin_rummy.agents import HighLowAgent
+from rlcard3.games.gin_rummy.agents import HighLowAgent
 
 # Make environment
-env = rlcard.make('gin-rummy')
-eval_env = rlcard.make('gin-rummy')
+env = rlcard3.make('gin-rummy')
+eval_env = rlcard3.make('gin-rummy')
 
 # adjust game settings
 choice = 1  # Please select a choice

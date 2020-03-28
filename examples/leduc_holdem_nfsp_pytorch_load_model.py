@@ -3,13 +3,13 @@
 import os
 import torch
 
-import rlcard
-from rlcard.agents.nfsp_agent_pytorch import NFSPAgent
-from rlcard.agents.random_agent import RandomAgent
-from rlcard.utils.utils import set_global_seed, tournament
+import rlcard3
+from rlcard3.agents.nfsp_agent_pytorch import NFSPAgent
+from rlcard3.agents.random_agent import RandomAgent
+from rlcard3.utils.utils import set_global_seed, tournament
 
 # Make environment
-env = rlcard.make('leduc-holdem')
+env = rlcard3.make('leduc-holdem')
 
 # Set a global seed
 set_global_seed(0)
@@ -26,7 +26,7 @@ for i in range(env.player_num):
     nfsp_agents.append(agent)
 
 # We have a pretrained model here. Change the path for your model.
-check_point_path = os.path.join(rlcard.__path__[0], 'models/pretrained/leduc_holdem_nfsp_pytorch/model.pth')
+check_point_path = os.path.join(rlcard3.__path__[0], 'models/pretrained/leduc_holdem_nfsp_pytorch/model.pth')
 checkpoint = torch.load(check_point_path)
 for agent in nfsp_agents:
     agent.load(checkpoint)

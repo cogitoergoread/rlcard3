@@ -4,16 +4,16 @@ An example of learning a DQN Agent on Mocsár
 
 import tensorflow as tf
 import os
-import rlcard
-from rlcard.agents.dqn_agent import DQNAgent
-from rlcard.agents.random_agent import RandomAgent
-from rlcard.utils.utils import set_global_seed, tournament
-from rlcard.utils.logger import Logger
-from rlcard.utils.config_read import Config
+import rlcard3
+from rlcard3.agents.dqn_agent import DQNAgent
+from rlcard3.agents.random_agent import RandomAgent
+from rlcard3.utils.utils import set_global_seed, tournament
+from rlcard3.utils.logger import Logger
+from rlcard3.utils.config_read import Config
 
 # Make environment
-env = rlcard.make('mocsar-cfg', {'multi_agent_mode': True})
-eval_env = rlcard.make('mocsar-cfg', {'multi_agent_mode': True})
+env = rlcard3.make('mocsar-cfg', {'multi_agent_mode': True})
+eval_env = rlcard3.make('mocsar-cfg', {'multi_agent_mode': True})
 
 # Config
 conf = Config('environ.properties')

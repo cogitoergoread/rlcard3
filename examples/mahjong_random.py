@@ -1,12 +1,12 @@
 ''' A toy example of playing Blackjack with random agents
 '''
 
-import rlcard
-from rlcard.agents.random_agent import RandomAgent
-from rlcard.utils.utils import set_global_seed
+import rlcard3
+from rlcard3.agents.random_agent import RandomAgent
+from rlcard3.utils.utils import set_global_seed
 
 # Make environment
-env = rlcard.make('mahjong')
+env = rlcard3.make('mahjong')
 episode_num = 2
 
 # Set a global seed

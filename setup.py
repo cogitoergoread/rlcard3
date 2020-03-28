@@ -9,7 +9,7 @@ extras = {
 }
 
 setuptools.setup(
-    name="rlcard",
+    name="rlcard3",
     version="0.1.12",
     author="Data Analytics at Texas A&M (DATA) Lab",
     author_email="khlai037@tamu.edu",
@@ -20,7 +20,7 @@ setuptools.setup(
     keywords=["Reinforcement Learning", "game", "RL", "AI"],
     packages=setuptools.find_packages(exclude=('tests',)),
     package_data={
-        'rlcard': ['models/pretrained/leduc_holdem_nfsp/*',
+        'rlcard3': ['models/pretrained/leduc_holdem_nfsp/*',
                    'models/pretrained/leduc_holdem_cfr/*',
                    'models/pretrained/leduc_holdem_nfsp_pytorch/*',
                    'games/uno/jsondata/action_space.json',

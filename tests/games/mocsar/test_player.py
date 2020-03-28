@@ -1,4 +1,4 @@
-from rlcard.games.mocsar.player import MocsarPlayer as Player
+from rlcard3.games.mocsar.player import MocsarPlayer as Player
 
 import pytest
 from pytest_steps import test_steps

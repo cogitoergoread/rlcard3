@@ -1,11 +1,11 @@
 import unittest
 
-from rlcard.models.model import Model
-from rlcard.models.pretrained_models import LeducHoldemNFSPModel, LeducHoldemNFSPPytorchModel, LeducHoldemCFRModel
-from rlcard.models.leducholdem_rule_models import LeducHoldemRuleModelV1, LeducHoldemRuleModelV2
+from rlcard3.models.model import Model
+from rlcard3.models.pretrained_models import LeducHoldemNFSPModel, LeducHoldemNFSPPytorchModel, LeducHoldemCFRModel
+from rlcard3.models.leducholdem_rule_models import LeducHoldemRuleModelV1, LeducHoldemRuleModelV2
 
-from rlcard.models.limitholdem_rule_models import LimitholdemRuleModelV1
-from rlcard.models.doudizhu_rule_models import DouDizhuRuleModelV1
+from rlcard3.models.limitholdem_rule_models import LimitholdemRuleModelV1
+from rlcard3.models.doudizhu_rule_models import DouDizhuRuleModelV1
 class TestModel(unittest.TestCase):
 
     def test_model(self):

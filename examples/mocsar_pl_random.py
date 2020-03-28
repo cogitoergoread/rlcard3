@@ -1,12 +1,12 @@
 """ A toy example of playing Mocsar with random agents
 """
 
-import rlcard
-from rlcard.utils.utils import set_global_seed
-from rlcard.model_agents.registration import get_agents
+import rlcard3
+from rlcard3.utils.utils import set_global_seed
+from rlcard3.model_agents.registration import get_agents
 
 # Make environment
-env = rlcard.make('mocsar')
+env = rlcard3.make('mocsar')
 episode_num = 2
 
 # Set a global seed

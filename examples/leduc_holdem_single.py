@@ -6,15 +6,15 @@ import tensorflow as tf
 import os
 import numpy as np
 
-import rlcard
-from rlcard.agents.dqn_agent import DQNAgent
-from rlcard.agents.random_agent import RandomAgent
-from rlcard.utils.utils import set_global_seed, tournament
-from rlcard.utils.logger import Logger
+import rlcard3
+from rlcard3.agents.dqn_agent import DQNAgent
+from rlcard3.agents.random_agent import RandomAgent
+from rlcard3.utils.utils import set_global_seed, tournament
+from rlcard3.utils.logger import Logger
 
 # Make environment
-env = rlcard.make('leduc-holdem', config={'single_agent_mode':True})
-eval_env = rlcard.make('leduc-holdem', config={'single_agent_mode':True})
+env = rlcard3.make('leduc-holdem', config={'single_agent_mode':True})
+eval_env = rlcard3.make('leduc-holdem', config={'single_agent_mode':True})
 
 # Set the iterations numbers and how frequently we evaluate the performance
 evaluate_every = 1000

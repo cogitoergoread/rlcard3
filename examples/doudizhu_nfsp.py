@@ -4,15 +4,15 @@
 import tensorflow as tf
 import os
 
-import rlcard
-from rlcard.agents.nfsp_agent import NFSPAgent
-from rlcard.agents.random_agent import RandomAgent
-from rlcard.utils.utils import set_global_seed, tournament
-from rlcard.utils.logger import Logger
+import rlcard3
+from rlcard3.agents.nfsp_agent import NFSPAgent
+from rlcard3.agents.random_agent import RandomAgent
+from rlcard3.utils.utils import set_global_seed, tournament
+from rlcard3.utils.logger import Logger
 
 # Make environment
-env = rlcard.make('doudizhu')
-eval_env = rlcard.make('doudizhu')
+env = rlcard3.make('doudizhu')
+eval_env = rlcard3.make('doudizhu')
 
 # Set the iterations numbers and how frequently we evaluate the performance
 evaluate_every = 1000
@@ -64,7 +64,7 @@ with tf.Session() as sess:
     # Initialize global variables
     sess.run(tf.global_variables_initializer())
 
-    # Init a Logger to plot the learning curvefrom rlcard.agents.random_agent import RandomAgent
+    # Init a Logger to plot the learning curvefrom rlcard3.agents.random_agent import RandomAgent
 
     logger = Logger(log_dir)
 

@@ -1,9 +1,9 @@
 import unittest
 
-from rlcard.games.leducholdem.game import LeducholdemGame as Game
-from rlcard.games.leducholdem.player import LeducholdemPlayer as Player
-from rlcard.games.leducholdem.judger import LeducholdemJudger as Judger
-from rlcard.core import Card
+from rlcard3.games.leducholdem.game import LeducholdemGame as Game
+from rlcard3.games.leducholdem.player import LeducholdemPlayer as Player
+from rlcard3.games.leducholdem.judger import LeducholdemJudger as Judger
+from rlcard3.core import Card
 
 class TestLeducholdemMethods(unittest.TestCase):
 

@@ -1,9 +1,9 @@
 import pytest
 
-from rlcard.games.mocsar.card import Ertekek
-from rlcard.games.mocsar.dealer import MocsarDealer as Dealer
-from rlcard.games.mocsar.player import MocsarPlayer as Player
-from rlcard.games.mocsar.utils import str_to_card_list
+from rlcard3.games.mocsar.card import Ertekek
+from rlcard3.games.mocsar.dealer import MocsarDealer as Dealer
+from rlcard3.games.mocsar.player import MocsarPlayer as Player
+from rlcard3.games.mocsar.utils import str_to_card_list
 
 
 def test_dealer_default():

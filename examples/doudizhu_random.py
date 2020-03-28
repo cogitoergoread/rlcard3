@@ -1,12 +1,12 @@
 ''' An example of playing Doudizhu with random agents
 '''
 
-import rlcard
-from rlcard.utils.utils import set_global_seed
-from rlcard.agents.random_agent import RandomAgent
+import rlcard3
+from rlcard3.utils.utils import set_global_seed
+from rlcard3.agents.random_agent import RandomAgent
 
 # Make environment
-env = rlcard.make('doudizhu')
+env = rlcard3.make('doudizhu')
 episode_num = 2
 
 # Set a global seed

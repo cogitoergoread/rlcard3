@@ -3,10 +3,10 @@ A toy example of playing against defined set of bots on Mocsár
 Using env "mocsar"-cfg Using 'human_mode'
 """
 
-import rlcard
+import rlcard3
 
 # Make environment and enable human mode
-env = rlcard.make('mocsar-cfg', config={'human_mode': True})
+env = rlcard3.make('mocsar-cfg', config={'human_mode': True})
 
 # Register agents
 agents = {"mocsar_random": 2, "mocsar_min": 2}

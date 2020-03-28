@@ -3,10 +3,10 @@ A toy example of playing against random bot on Mocsár
 Using env "mocsar" and 'human_mode'. It implies using random agent.
 """
 
-import rlcard
+import rlcard3
 
 # Make environment and enable human mode
-env = rlcard.make(env_id='mocsar', config={'human_mode': True})
+env = rlcard3.make(env_id='mocsar', config={'human_mode': True})
 
 # Reset environment
 state = env.reset()

@@ -1,10 +1,10 @@
 import unittest
 import numpy as np
-from rlcard.utils.utils import get_random_cards, init_54_deck, init_standard_deck, is_in_cards, is_pair, is_single, rank2int, take_out_cards, print_card, elegent_form, init_players, get_upstream_player_id, get_downstream_player_id, reorganize, set_global_seed, get_cards_from_ranks,tournament
-import rlcard
-from rlcard.agents.random_agent import RandomAgent
+from rlcard3.utils.utils import get_random_cards, init_54_deck, init_standard_deck, is_in_cards, is_pair, is_single, rank2int, take_out_cards, print_card, elegent_form, init_players, get_upstream_player_id, get_downstream_player_id, reorganize, set_global_seed, get_cards_from_ranks,tournament
+import rlcard3
+from rlcard3.agents.random_agent import RandomAgent
 
-from rlcard.core import Card, Player
+from rlcard3.core import Card, Player
 
 class TestUtils(unittest.TestCase):
 
@@ -110,7 +110,7 @@ class TestUtils(unittest.TestCase):
         self.assertEqual(np.random.get_state()[1][0], 0)
 
     def test_tournament(self):
-        env = rlcard.make('leduc-holdem')
+        env = rlcard3.make('leduc-holdem')
         env.set_agents([RandomAgent(env.action_num), RandomAgent(env.action_num)])
         payoffs = tournament(env,1000)
         self.assertEqual(len(payoffs), 2)

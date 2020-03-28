@@ -5,7 +5,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-PNG_SAVE_PRFX = 'F:/muszi/AnaPy/rlcard2/rlcard/mocsar_measure/result_cuda'
+PNG_SAVE_PRFX = 'F:/muszi/AnaPy/rlcard2/rlcard3/mocsar_measure/result_cuda'
 LOG_SAVE_PRFX = 'f:/muszi/gwork/mocsar_unpack'
 
 case = 'mocsar_4fele_55_10_bigosb'

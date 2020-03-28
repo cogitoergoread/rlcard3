@@ -1,6 +1,6 @@
 import unittest
 
-from rlcard.games.nolimitholdem.game import NolimitholdemGame as Game
+from rlcard3.games.nolimitholdem.game import NolimitholdemGame as Game
 
 class TestNolimitholdemMethods(unittest.TestCase):
 

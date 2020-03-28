@@ -6,7 +6,7 @@ You can add your own pre-trained/rule-based models to the toolkit by following s
 *   **Register the model.** Register the model in `rlcard/models/__init__.py`.
 *   **Load the model in environment.** An example of loading `leduc-holdem-nfsp` model is as follows:
 ```python
-from rlcard import models
+from rlcard3 import models
 leduc_nfsp_model = models.load('leduc-holdem-nfsp')
 ```
 Then use `leduc_nfsp_model.agents` to obtain all the agents for the game.

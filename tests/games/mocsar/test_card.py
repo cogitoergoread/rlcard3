@@ -1,5 +1,5 @@
-from rlcard.games.mocsar.card import MocsarCard as Card
-from rlcard.games.mocsar.card import Ertekek, Szinek
+from rlcard3.games.mocsar.card import MocsarCard as Card
+from rlcard3.games.mocsar.card import Ertekek, Szinek
 
 import pytest
 from pytest_steps import test_steps

@@ -1,16 +1,16 @@
 ''' A toy example of playing GinRummy with random agents
 '''
 
-import rlcard
-from rlcard.agents.random_agent import RandomAgent
-from rlcard.utils.utils import set_global_seed
+import rlcard3
+from rlcard3.agents.random_agent import RandomAgent
+from rlcard3.utils.utils import set_global_seed
 
-from rlcard.games.gin_rummy.utils.move import *
-from rlcard.games.gin_rummy.player import GinRummyPlayer
-from rlcard.games.gin_rummy.agents import HighLowAgent
+from rlcard3.games.gin_rummy.utils.move import *
+from rlcard3.games.gin_rummy.player import GinRummyPlayer
+from rlcard3.games.gin_rummy.agents import HighLowAgent
 
 # Make environment
-env = rlcard.make('gin-rummy')
+env = rlcard3.make('gin-rummy')
 episode_num = 1
 
 # adjust game settings

@@ -2,7 +2,7 @@ import unittest
 import tensorflow as tf
 import numpy as np
 
-from rlcard.agents.dqn_agent import DQNAgent
+from rlcard3.agents.dqn_agent import DQNAgent
 
 class TestDQN(unittest.TestCase):
 

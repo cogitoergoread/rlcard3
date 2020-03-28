@@ -1,5 +1,5 @@
 import pytest
-from rlcard.utils.config_read import Config
+from rlcard3.utils.config_read import Config
 
 def test_conf():
     conf = Config('environ.properties')

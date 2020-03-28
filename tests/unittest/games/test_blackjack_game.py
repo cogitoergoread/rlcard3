@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
 
-from rlcard.games.blackjack.game import BlackjackGame as Game
+from rlcard3.games.blackjack.game import BlackjackGame as Game
 
 
 class TestBlackjackGame(unittest.TestCase):

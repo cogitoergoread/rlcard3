@@ -1,12 +1,12 @@
 ''' A toy example of playing Uno with random agents
 '''
 
-import rlcard
-from rlcard.agents.random_agent import RandomAgent
-from rlcard.utils.utils import set_global_seed
+import rlcard3
+from rlcard3.agents.random_agent import RandomAgent
+from rlcard3.utils.utils import set_global_seed
 
 # Make environment
-env = rlcard.make('uno')
+env = rlcard3.make('uno')
 episode_num = 2
 
 # Set a global seed

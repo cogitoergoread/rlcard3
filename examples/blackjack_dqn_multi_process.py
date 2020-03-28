@@ -5,10 +5,10 @@ import tensorflow as tf
 import multiprocessing
 from multiprocessing import Process, JoinableQueue, Queue
 
-import rlcard
-from rlcard.agents.dqn_agent import DQNAgent
-from rlcard.utils.utils import set_global_seed, assign_task, tournament
-from rlcard.utils.logger import Logger
+import rlcard3
+from rlcard3.agents.dqn_agent import DQNAgent
+from rlcard3.utils.utils import set_global_seed, assign_task, tournament
+from rlcard3.utils.logger import Logger
 
 # Set the the number of steps for collecting normalization statistics
 # and intial memory size
@@ -37,7 +37,7 @@ class BlackjackProcess(Process):
 
     def run(self):
         #import tensorflow as tf
-        self.env = rlcard.make('blackjack')
+        self.env = rlcard3.make('blackjack')
         self.sess = tf.Session()
         agent = DQNAgent(self.sess,
                          scope='sub-dqn' + str(self.index),
@@ -98,8 +98,8 @@ if __name__ == '__main__':
         p.start()
 
     # Make environment
-    env = rlcard.make('blackjack')
-    eval_env = rlcard.make('blackjack')
+    env = rlcard3.make('blackjack')
+    eval_env = rlcard3.make('blackjack')
 
     with tf.Session() as sess:
 

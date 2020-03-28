@@ -2,19 +2,19 @@
 '''
 import numpy as np
 
-import rlcard
-from rlcard.agents.best_response_agent import BRAgent
-from rlcard.agents.random_agent import RandomAgent
-from rlcard.agents.cfr_agent import CFRAgent
-from rlcard.agents.cfr_agent import CFRAgent
-from rlcard import models
-from rlcard.utils.utils import set_global_seed, tournament
-from rlcard.utils.exploitability import exploitability
-from rlcard.utils.logger import Logger
+import rlcard3
+from rlcard3.agents.best_response_agent import BRAgent
+from rlcard3.agents.random_agent import RandomAgent
+from rlcard3.agents.cfr_agent import CFRAgent
+from rlcard3.agents.cfr_agent import CFRAgent
+from rlcard3 import models
+from rlcard3.utils.utils import set_global_seed, tournament
+from rlcard3.utils.exploitability import exploitability
+from rlcard3.utils.logger import Logger
 
 # Make environment and enable human mode
-env = rlcard.make('leduc-holdem', config={'allow_step_back': True, 'allow_raw_data': True})
-eval_env = rlcard.make('leduc-holdem', config={'allow_step_back': True, 'allow_raw_data': True})
+env = rlcard3.make('leduc-holdem', config={'allow_step_back': True, 'allow_raw_data': True})
+eval_env = rlcard3.make('leduc-holdem', config={'allow_step_back': True, 'allow_raw_data': True})
 
 # Set the iterations numbers and how frequently we evaluate/save plot
 evaluate_every = 10

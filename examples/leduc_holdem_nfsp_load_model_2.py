@@ -1,13 +1,13 @@
 ''' Another example of loading a pre-trained NFSP model on Leduc Hold'em
     Here, we directly load the model from model zoo
 '''
-import rlcard
-from rlcard.agents.random_agent import RandomAgent
-from rlcard.utils.utils import set_global_seed, tournament
-from rlcard import models
+import rlcard3
+from rlcard3.agents.random_agent import RandomAgent
+from rlcard3.utils.utils import set_global_seed, tournament
+from rlcard3 import models
 
 # Make environment
-env = rlcard.make('leduc-holdem')
+env = rlcard3.make('leduc-holdem')
 
 # Set a global seed
 set_global_seed(0)

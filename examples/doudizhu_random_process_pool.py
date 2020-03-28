@@ -5,9 +5,9 @@ import time
 import multiprocessing
 import numpy as np
 
-import rlcard
-from rlcard.agents.random_agent import RandomAgent
-from rlcard.utils.utils import set_global_seed
+import rlcard3
+from rlcard3.agents.random_agent import RandomAgent
+from rlcard3.utils.utils import set_global_seed
 
 if __name__ == '__main__':
     # Timer start
@@ -23,7 +23,7 @@ if __name__ == '__main__':
     pool = multiprocessing.Pool(process_num)
 
     # Set game and make environment
-    env = rlcard.make('doudizhu')
+    env = rlcard3.make('doudizhu')
 
     # Set episode_num
     episode_num = 10000

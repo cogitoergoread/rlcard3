@@ -1,8 +1,8 @@
-import rlcard
-from rlcard.games.mocsar.stat import MocsarStat
+import rlcard3
+from rlcard3.games.mocsar.stat import MocsarStat
 
 # Make environment and enable human mode
-env = rlcard.make('mocsar-cfg', config={'multi_agent_mode': True})
+env = rlcard3.make('mocsar-cfg', config={'multi_agent_mode': True})
 
 # Register agents
 # agents = {"mocsar_random": 2, "mocsar_min": 2}

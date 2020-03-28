@@ -4,12 +4,12 @@ In this document, we provide some toy examples for getting started. All the exam
 ## Playing with Random Agents
 We have set up a random agent that can play randomly on each environment. An example of applying a random agent on Blackjack is as follow:
 ```python
-import rlcard
-from rlcard.agents.random_agent import RandomAgent
-from rlcard.utils.utils import set_global_seed
+import rlcard3
+from rlcard3.agents.random_agent import RandomAgent
+from rlcard3.utils.utils import set_global_seed
 
 # Make environment
-env = rlcard.make('blackjack')
+env = rlcard3.make('blackjack')
 episode_num = 2
 
 # Set a global seed
@@ -48,14 +48,14 @@ The second example is to use Deep-Q learning to train an agent on Blackjack. We 
 import tensorflow as tf
 import os
 
-import rlcard
-from rlcard.agents.dqn_agent import DQNAgent
-from rlcard.utils.utils import set_global_seed, tournament
-from rlcard.utils.logger import Logger
+import rlcard3
+from rlcard3.agents.dqn_agent import DQNAgent
+from rlcard3.utils.utils import set_global_seed, tournament
+from rlcard3.utils.logger import Logger
 
 # Make environment
-env = rlcard.make('blackjack')
-eval_env = rlcard.make('blackjack')
+env = rlcard3.make('blackjack')
+eval_env = rlcard3.make('blackjack')
 
 # Set the iterations numbers and how frequently we evaluate/save plot
 evaluate_every = 100
@@ -168,10 +168,10 @@ import numpy as np
 import tensorflow as tf
 from multiprocessing import Process, JoinableQueue, Queue
 
-import rlcard
-from rlcard.agents.dqn_agent import DQNAgent
-from rlcard.utils.utils import set_global_seed, assign_task
-from rlcard.utils.logger import Logger
+import rlcard3
+from rlcard3.agents.dqn_agent import DQNAgent
+from rlcard3.utils.utils import set_global_seed, assign_task
+from rlcard3.utils.logger import Logger
 
 # Set the the number of steps for collecting normalization statistics
 # and intial memory size
@@ -204,7 +204,7 @@ class BlackjackProcess(Process):
 
     def run(self):
         #import tensorflow as tf
-        self.env = rlcard.make('blackjack')
+        self.env = rlcard3.make('blackjack')
         self.sess = tf.Session()
         agent = DQNAgent(self.sess,
                          scope='sub-dqn' + str(self.index),
@@ -263,8 +263,8 @@ for p in PROCESSES:
     p.start()
 
 # Make environment
-env = rlcard.make('blackjack')
-eval_env = rlcard.make('blackjack')
+env = rlcard3.make('blackjack')
+eval_env = rlcard3.make('blackjack')
 
 with tf.Session() as sess:
 
@@ -399,10 +399,10 @@ INFO - Step 2199, loss: 0.75212180614471447
 ## Having Fun with Pretrained Leduc Model
 We have designed simple human interfaces to play against the pretrained model. Leduc Hold'em is a simplified version of Texas Hold'em. Rules can be found [here](games.md#leduc-holdem). Example of playing against Leduc Hold'em CFR model is as below:
 ```python
-import rlcard
+import rlcard3
 
 # Make environment and enable human mode
-env = rlcard.make('leduc-holdem', config={'human_mode':True})
+env = rlcard3.make('leduc-holdem', config={'human_mode':True})
 
 print(">> Leduc Hold'em pre-trained model")
 
@@ -462,15 +462,15 @@ import tensorflow as tf
 import os
 import numpy as np
 
-import rlcard
-from rlcard.agents.dqn_agent import DQNAgent
-from rlcard.agents.random_agent import RandomAgent
-from rlcard.utils.utils import set_global_seed, tournament
-from rlcard.utils.logger import Logger
+import rlcard3
+from rlcard3.agents.dqn_agent import DQNAgent
+from rlcard3.agents.random_agent import RandomAgent
+from rlcard3.utils.utils import set_global_seed, tournament
+from rlcard3.utils.logger import Logger
 
 # Make environment
-env = rlcard.make('leduc-holdem', config={'single_agent_mode':True})
-eval_env = rlcard.make('leduc-holdem', config={'single_agent_mode':True})
+env = rlcard3.make('leduc-holdem', config={'single_agent_mode':True})
+eval_env = rlcard3.make('leduc-holdem', config={'single_agent_mode':True})
 
 # Set the iterations numbers and how frequently we evaluate/save plot
 evaluate_every = 1000
@@ -545,15 +545,15 @@ To show how we can use `step` and `step_back` to traverse the game tree, we prov
 ```python
 import numpy as np
 
-import rlcard
-from rlcard.agents.cfr_agent import CFRAgent
-from rlcard import models
-from rlcard.utils.utils import set_global_seed, tournament
-from rlcard.utils.logger import Logger
+import rlcard3
+from rlcard3.agents.cfr_agent import CFRAgent
+from rlcard3 import models
+from rlcard3.utils.utils import set_global_seed, tournament
+from rlcard3.utils.logger import Logger
 
 # Make environment and enable human mode
-env = rlcard.make('leduc-holdem', config={'allow_step_back':True})
-eval_env = rlcard.make('leduc-holdem')
+env = rlcard3.make('leduc-holdem', config={'allow_step_back':True})
+eval_env = rlcard3.make('leduc-holdem')
 
 # Set the iterations numbers and how frequently we evaluate/save plot
 evaluate_every = 100

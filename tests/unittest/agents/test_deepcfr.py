@@ -1,16 +1,16 @@
 import unittest
 import tensorflow as tf
 import numpy as np
-import rlcard
+import rlcard3
 
-from rlcard.agents.deep_cfr_agent import DeepCFR, FixedSizeRingBuffer
+from rlcard3.agents.deep_cfr_agent import DeepCFR, FixedSizeRingBuffer
 
 class TestUtilsMethos(unittest.TestCase):
 
     def test_init(self):
 
         sess = tf.InteractiveSession()
-        env = rlcard.make('leduc-holdem', config={'allow_step_back':True})
+        env = rlcard3.make('leduc-holdem', config={'allow_step_back':True})
         agent = DeepCFR(session=sess,
                         env=env,
                         policy_network_layers=(4,4),
@@ -35,7 +35,7 @@ class TestUtilsMethos(unittest.TestCase):
         num_iterations = 10
 
         sess = tf.InteractiveSession()
-        env = rlcard.make('leduc-holdem', {'allow_step_back':True})
+        env = rlcard3.make('leduc-holdem', {'allow_step_back':True})
         agent = DeepCFR(session=sess,
                         env=env,
                         policy_network_layers=(128,128),
