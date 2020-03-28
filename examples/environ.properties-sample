@@ -12,3 +12,5 @@ norm_step = 1000
 
 nr_players = 4
 nr_cards=55
+
+train_every = 1
