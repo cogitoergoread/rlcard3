@@ -72,7 +72,7 @@ with tf.compat.v1.Session() as sess:
 
         # Evaluate the performance. Play with random agents.
         if episode % evaluate_every == 0:
-            logger.log_performance(env.timestep, tournament(eval_env, evaluate_num)[0])
+            logger.log_performance(env.timestep, tournament(eval_env, evaluate_num)[0], episode=episode)
 
     # Close files in the logger
     logger.close_files()
