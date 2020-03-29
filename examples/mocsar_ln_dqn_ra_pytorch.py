@@ -36,7 +36,7 @@ memory_init_size = conf.get_int('memory_init_size')
 train_every = conf.get_int('train_every')
 
 # The paths for saving the logs and learning curves
-log_dir = './experiments/mocsar_dqn_ra_result/'
+log_dir = './experiments/mocsar_dqn_ra_pytorch_result/'
 
 # Set a global seed
 set_global_seed(0)
@@ -85,15 +85,18 @@ for episode in range(conf.get_int('episode_num')):
     if episode % evaluate_every == 0:
         logger.log_performance(env.timestep, tournament(eval_env, evaluate_num)[0], episode=episode)
 
+
+# Save model
+save_dir = 'models/mocsar_dqn_ra_pytorch'
+if not os.path.exists(save_dir):
+    os.makedirs(save_dir)
+state_dict = agent.get_state_dict()
+logger.log('\n########## Pytorch Save model ##########')
+logger.log('\n' + str(state_dict.keys()))
+torch.save(state_dict, os.path.join(save_dir, 'model.pth'))
+
 # Close files in the logger
 logger.close_files()
 
 # Plot the learning curve
-logger.plot('DQN RA')
-
-# Save model
-save_dir = 'models/mocsar_dqn_ra'
-if not os.path.exists(save_dir):
-    os.makedirs(save_dir)
-saver = tf.compat.v1.train.Saver()
-saver.save(sess, os.path.join(save_dir, 'model'))
+logger.plot('DQN RA PyTorch')
