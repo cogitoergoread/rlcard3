@@ -4,13 +4,13 @@
     Author: József Varga
     Date created: 3/29/2020
 """
-from typing import Tuple
+from typing import Tuple, Dict
 import rlcard3
 
 from rlcard3.utils.config_read import Config
 
 
-def init_environment(conf: Config, envoronment_id: str) -> Tuple:
+def init_environment(conf: Config, env_id: str, config: Dict = {}) -> Tuple:
     """
     Initialize Mocsár envronments, and return them
     :param conf: Mocsaár config, based on environ.propertirs
@@ -18,8 +18,8 @@ def init_environment(conf: Config, envoronment_id: str) -> Tuple:
     :return: (env, eval_env)
     """
     # Make environment
-    env = rlcard3.make(envoronment_id)
-    eval_env = rlcard3.make(envoronment_id)
+    env = rlcard3.make(env_id=env_id, config=config)
+    eval_env = rlcard3.make(env_id=env_id, config=config)
 
     # Set Nr of players and cards
     env.game.set_game_params(

@@ -4,37 +4,19 @@ An example of learning a DQN Agent on Mocsár
 
 import torch
 import os
-import rlcard3
 from rlcard3.agents.dqn_agent_pytorch import DQNAgent
 from rlcard3.agents.random_agent import RandomAgent
 from rlcard3.utils.utils import set_global_seed, tournament
 from rlcard3.utils.logger import Logger
 from rlcard3.utils.config_read import Config
-
-# Make environment
-env = rlcard3.make('mocsar-cfg', {'multi_agent_mode': True})
-eval_env = rlcard3.make('mocsar-cfg', {'multi_agent_mode': True})
+from rlcard3.games.mocsar.util_examples import init_environment, init_vars
 
 # Config
 conf = Config('environ.properties')
-# Set Nr of players and cards
-env.game.set_game_params(
-    num_players=conf.get_int('nr_players'),
-    num_cards=conf.get_int('nr_cards')
-)
-eval_env.game.set_game_params(
-    num_players=conf.get_int('nr_players'),
-    num_cards=conf.get_int('nr_cards')
-)
-
-# Set the iterations numbers and how frequently we evaluate/save plot
-evaluate_num = conf.get_int('evaluate_num')
-evaluate_every = conf.get_int('evaluate_every')
-# Set the the number of steps for collecting normalization statistics
-# and intial memory size
-memory_init_size = conf.get_int('memory_init_size')
-train_every = conf.get_int('train_every')
-
+# Environemtn
+env, eval_env = init_environment(conf=conf, env_id='mocsar-cfg', config= {'multi_agent_mode': True})
+# parameter variables
+evaluate_num, evaluate_every, memory_init_size, train_every, episode_num = init_vars(conf=conf)
 # The paths for saving the logs and learning curves
 log_dir = './experiments/mocsar_dqn_ra_pytorch_result/'
 
@@ -68,12 +50,13 @@ logger = Logger(log_dir)
 
 # Log Game info
 logger.log('\n########## Game information ##########')
-logger.log('\nNumPlayers: {}, NumCards: {}'.format(env.game.num_players,
-                                                   env.game.num_cards))
+logger.log('\nNumPlayers: {}, NumCards: {}, Episodes: {}'.format(env.game.num_players,
+                                                                 env.game.num_cards,
+                                                                 episode_num))
 
 # logger.log(f'\nTrain Agents:{get_agent_str(env_agent_list)}')
 # logger.log(f'\nEval Agents:{get_agent_str(eval_agent_list)}')
-for episode in range(conf.get_int('episode_num')):
+for episode in range(episode_num):
 
     # Generate data from the environment
     trajectories, _ = env.run(is_training=True)

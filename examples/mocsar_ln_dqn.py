@@ -4,7 +4,6 @@ An example of learning a DQN Agent on Mocsár
 
 import tensorflow as tf
 import os
-
 from rlcard3.agents.dqn_agent import DQNAgent
 from rlcard3.agents.random_agent import RandomAgent
 from rlcard3.games.mocsar.util_examples import init_environment, init_vars
@@ -15,7 +14,7 @@ from rlcard3.utils.config_read import Config
 # Config
 conf = Config('environ.properties')
 # Environemtn
-env, eval_env = init_environment(conf=conf, envoronment_id='mocsar')
+env, eval_env = init_environment(conf=conf, env_id='mocsar')
 # parameter variables
 evaluate_num, evaluate_every, memory_init_size, train_every, episode_num = init_vars(conf=conf)
 # The paths for saving the logs and learning curves
