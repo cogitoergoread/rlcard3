@@ -46,8 +46,10 @@ class Logger(object):
         self.writer.writerow({'timestep': timestep, 'reward': reward, 'episode': episode, 'timestamp' : timestamp})
         print('')
         self.log('----------------------------------------')
-        self.log('  timestep     |  ' + str(timestep) + '    | time  |' + timestamp)
+        self.log('  timestep     |  ' + str(timestep))
         self.log('  reward       |  ' + str(reward))
+        self.log('  timestamp    |  ' + timestamp)
+        self.log('  episode      |  ' + str(episode))
         self.log('----------------------------------------')
 
     def plot(self, algorithm):
