@@ -29,7 +29,7 @@ agent = DQNAgent(scope='dqn',
                  train_every=train_every,
                  state_shape=env.state_shape,
                  mlp_layers=[512, 512],
-                 device=torch.device('gpu'))
+                 device=torch.device('cuda'))
 
 random_agent = RandomAgent(action_num=eval_env.action_num)
 

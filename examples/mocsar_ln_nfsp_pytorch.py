@@ -37,7 +37,7 @@ for i in range(env.player_num):
                       train_every=train_every,
                       q_train_every=train_every,
                       q_mlp_layers=[512, 512],
-                      device=torch.device('gpu'))
+                      device=torch.device('cuda'))
     agents.append(agent)
 
 random_agent = RandomAgent(action_num=eval_env.action_num)
