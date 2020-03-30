@@ -1,6 +1,6 @@
 import importlib
-from typing import Dict
-
+from typing import Dict, List
+from rlcard3 import models
 
 class AgentSpec(object):
     """ A specification for a particular Agent.
@@ -82,7 +82,7 @@ def load(agent_id: str):
     return agent_registry.load(agent_id)
 
 
-def get_agents(agents: Dict, nr_players: int):
+def get_agents(agents: Dict, nr_players: int, action_num: int, state_shape: List):
     """
     Initalize agents to play the game.
     :param nr_players: Number of players, amount of agents generated
@@ -91,8 +91,28 @@ def get_agents(agents: Dict, nr_players: int):
     agent_list = list()
     i = 0
     for agent_id, nr_agents in agents.items():
+        if agent_id == 'mocsar-nfsp-pytorch':
+            # Pre trained model from rlcard3.models.pretrained_models, NFSP has multiple (four) agents in it
+            # Here we directly load NFSP models from /models module
+            nfsp_agents = models.load(agent_id,
+                                      num_players=nr_players,
+                                      action_num= action_num,
+                                      state_shape=state_shape).agents
+            for i in range(nr_agents):
+                agent_list.append(nfsp_agents[i])
+                i += 1
+                if i >= nr_players:
+                    return agent_list
         for _ in range(nr_agents):
-            rule_agent = load(agent_id=agent_id)
+            if agent_id == 'mocsar-dqn-pytorch':
+                # Pre trained model from rlcard3.models.pretrained_models, DQN
+                rule_agent = models.load(agent_id,
+                                      num_players=nr_players,
+                                      action_num= action_num,
+                                      state_shape=state_shape).agents[0]
+            else:
+                # Models from model_agents
+                rule_agent = load(agent_id=agent_id)
             agent_list.append(rule_agent)
             i += 1
             if i >= nr_players:

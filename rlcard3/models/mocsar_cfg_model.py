@@ -20,6 +20,8 @@ class MocsarCfgModel(MocsarRuleModelV1):
         """
         super().__init__(**kwargs)
         self.num_players = kwargs['num_players']
+        self.action_num =kwargs['action_num']
+        self.state_shape = kwargs['state_shape']
         self.use_raw = True
         self.rule_agents = list()
 
@@ -29,6 +31,9 @@ class MocsarCfgModel(MocsarRuleModelV1):
         :param agents: Dictionary of agent_name: number of agents pairs
         """
         agent_list: List
-        agent_list = get_agents(agents=agents, nr_players=self.num_players)
+        agent_list = get_agents(agents=agents,
+                                nr_players=self.num_players,
+                                action_num = self.action_num,
+                                state_shape = self.state_shape)
         self.rule_agents.clear()
         self.rule_agents.extend(agent_list)

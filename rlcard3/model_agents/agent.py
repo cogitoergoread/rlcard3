@@ -21,6 +21,6 @@ class Agent(object):
         raise NotImplementedError
 
     def eval_step(self, state: Dict):
-        """ Step for evaluation. The same to step
+        """ Predict the action for evaluation purpose.
         """
         raise NotImplementedError

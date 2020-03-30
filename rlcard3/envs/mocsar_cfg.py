@@ -25,7 +25,10 @@ class MocsarCfgEnv(MocsarEnv):
         Load pretrained/rule model based on config.
         :return: A Model object
         """
-        return models.load('mocsar-cfg', num_players=self.game.get_player_num())
+        return models.load('mocsar-cfg',
+                           num_players=self.game.get_player_num(),
+                           action_num =self.game.get_action_num(),
+                           state_shape = self.state_shape)
 
     def run_multi_agent(self, stat: MocsarStat, seed: int = None):
         """
