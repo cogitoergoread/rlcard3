@@ -14,7 +14,7 @@ set_global_seed(0)
 
 # Here we directly load NFSP models from /models module
 dqn_agents = models.load('mocsar-dqn-pytorch',
-                         num_players=env.nr_players,
+                         num_players=env.game.get_player_num(),
                          action_num=env.action_num,
                          state_shape=env.state_shape).agents
 
