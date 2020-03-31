@@ -139,6 +139,8 @@ class MocsarPreNFSPPytorchModel(Model):
         check_point_path = os.path.join(ROOT_PATH, 'mocsar_nfsp_pytorch/model.pth')
         checkpoint = torch.load(check_point_path)
         for agent in self.nfsp_agents:
+            agent.id = "j"
+            agent.name = "PreNFSPPytorch"
             agent.load(checkpoint)
 
     @property
@@ -176,6 +178,8 @@ class MocsarPreDQNPytorchModel(Model):
         checkpoint = torch.load(check_point_path)
         self.agent.load(checkpoint)
         self.num_players = num_players
+        self.agent.id = "k"
+        self.agent.name = "PreDQNPytorch"
 
     @property
     def agents(self):
