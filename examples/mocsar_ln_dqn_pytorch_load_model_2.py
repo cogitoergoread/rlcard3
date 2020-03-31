@@ -13,7 +13,10 @@ env = rlcard3.make('mocsar')
 set_global_seed(0)
 
 # Here we directly load NFSP models from /models module
-dqn_agents = models.load('mocsar-dqn-pytorch').agents
+dqn_agents = models.load('mocsar-dqn-pytorch',
+                         num_players=env.nr_players,
+                         action_num=env.action_num,
+                         state_shape=env.state_shape).agents
 
 # Evaluate the performance. Play with random agents.
 evaluate_num = 500
@@ -21,4 +24,3 @@ random_agent = RandomAgent(env.action_num)
 env.set_agents([dqn_agents[0], random_agent, random_agent, random_agent])
 reward = tournament(env, evaluate_num)[0]
 print('Average reward against random agent: ', reward)
-
