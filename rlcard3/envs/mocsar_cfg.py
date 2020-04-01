@@ -51,15 +51,12 @@ class MocsarCfgEnv(MocsarEnv):
         while not self.is_over():
             agent = self.model.agents[player_id]
             a_extract = get_by_id(aid=agent.id).a_extracted
-            print(f"Multi, ag:{a_extract}, s:{state['is_extract']}")
             if a_extract and not state['is_extract']:
-                print("State Conv")
                 # Az Agent számára obs status kell, de nem az van
                 step_state = {'obs': encode_to_obs(state=state),
                            'legal_actions': [string_to_action(action) for action in state['legal_actions'] ] ,
                            'is_extract': True  # State is extracted>
                            }
-                print(step_state)
             else:
                 step_state =state
             if self.model.use_raw:
