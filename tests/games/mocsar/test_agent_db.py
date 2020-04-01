@@ -1,6 +1,5 @@
 import pytest
-from rlcard3.games.mocsar.agentdb import get_by_id, MocsarAgentDB
-
+from rlcard3.games.mocsar.agentdb import get_by_id, MocsarAgentDB, str_to_agentdict
 
 testdata_enu = [
     pytest.param('d', 'PreDQNAgent', "mocsar_predqn", id="d"),
@@ -20,12 +19,15 @@ def test_enums(aid, name, agent_id):
     assert ae.aname == name
     assert ae.agent_id == agent_id
 
+
 testdata_lidi = [
     pytest.param('RRMM,RRRM', [
-    {"mocsar_random": 2, "mocsar_min": 2},
-        {"mocsar_random": 3, "mocsar_min": 1}], id= "2RRMM"),
+        {"mocsar_random": 2, "mocsar_min": 2},
+        {"mocsar_random": 3, "mocsar_min": 1}], id="2RRMM"),
     pytest.param('ddRR', [{"mocsar_random": 2, "mocsar_predqn": 2}], id="DQ"),
-    ]
+]
+
+
 @pytest.mark.parametrize("astr, lidi", testdata_lidi)
 def test_enums(astr, lidi):
     agli = str_to_agentdict(agent_str_list=astr)

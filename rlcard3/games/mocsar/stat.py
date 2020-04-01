@@ -9,6 +9,7 @@ import csv
 import datetime
 from rlcard3.games.mocsar.utils import card_list_to_str
 import json
+import os
 
 
 class MocsarStat:
@@ -16,7 +17,7 @@ class MocsarStat:
     game_hist: List[Dict]  # List of dictionary items, See "tennivalo.md",  #### Játékmenet
     game: Game
     game_nr: int  # Actual number of the current game int the series
-    LOG_DIR = "F:/tmp/rlcard2log"  # Path, to store the log directories
+    log_dir: str  # Path, to store the log directories
     log_batch_dir: str  # Path, to store the log files
     filename: str  # name of the files to store info in
     nr_of_cards: int  # The number of cards the game was played
@@ -25,16 +26,17 @@ class MocsarStat:
     agentstr: str  # Agent names joined
     nr_of_games: int  # Number of games
 
-    def __init__(self, game: Game, agents: List, nr_of_games: int, batch_name: str = ""):
+    def __init__(self, game: Game, agents: List, nr_of_games: int, log_dir: str, batch_name: str = ""):
         self.game = game
         self.nr_of_games = nr_of_games
         self.game_payeoffs = list()
         self.game_hist = list()
         self.agent_ids = list()
         self.agent_names = list()
+        self.log_dir = log_dir
 
         self.reset_game_nr(agents)
-        self.create_batch_dir(batch_name, datetime.datetime.now().strftime('%Y%m%d-%H%M%S'))
+        self._create_batch_dir(batch_name, datetime.datetime.now().strftime('%Y%m%d-%H%M%S'))
 
     def next_game(self):
         """Invrement game nr"""
@@ -100,14 +102,14 @@ class MocsarStat:
         """
         # Write results to csv
         df = self.get_dataframe()
-        df.to_csv(f"{self.log_batch_dir}/{self.filename}.csv",
+        df.to_csv(os.path.join(self.log_batch_dir, f"{self.filename}.csv"),
                   quoting=csv.QUOTE_NONNUMERIC, sep=";")
 
         # Write history to json
-        with open(f"{self.log_batch_dir}/{self.filename}.json", 'w', encoding='utf-8') as f:
+        with open(os.path.join(self.log_batch_dir, f"{self.filename}.json"), 'w', encoding='utf-8') as f:
             json.dump(self.game_hist, f, ensure_ascii=False, indent=4)
 
-    def create_batch_dir(self, batch_name: str, timestamp: str):
+    def _create_batch_dir(self, batch_name: str, timestamp: str):
         """
         Létrehoz egy alkönyvtárat, ha a batch név neg van adva
         :param timestamp: Az az időpont, amikor fut a játék összehasonlítás
@@ -115,10 +117,9 @@ class MocsarStat:
         :return:
         """
         if len(batch_name) == 0:
-            self.log_batch_dir = self.LOG_DIR
+            self.log_batch_dir = self.log_dir
         else:
-            dirname = f"{self.LOG_DIR}/{batch_name}_{timestamp}"
-            import os
+            dirname = os.path.join(self.log_dir, f"{batch_name}_{timestamp}")
             if not os.path.exists(dirname):
                 os.makedirs(dirname)
             self.log_batch_dir = dirname

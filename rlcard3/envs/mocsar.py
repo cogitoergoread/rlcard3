@@ -21,8 +21,8 @@ class MocsarEnv(Env):
 
     def __init__(self, config):
         self.game = Game()
-        super().__init__(config=config)
         self.state_shape = [3, 9, 14]
+        super().__init__(config=config)
 
     def _extract_state(self, state):  # 200213 don't use state ???
         """
@@ -107,5 +107,5 @@ class MocsarEnv(Env):
         :param action: Code of the action
         """
         if type(action) is tuple:
-            action, _= action
+            action, _ = action
         print(f"\nAction code:{string_to_action(action)}, action:{action}")

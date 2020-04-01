@@ -7,6 +7,8 @@ import os
 import rlcard3
 
 ROOT_PATH = os.path.join(rlcard3.__path__[0], '..', 'examples')
+
+
 class Config:
 
     def __init__(self, config_file):
@@ -26,18 +28,20 @@ class Config:
 
             return config
 
-    def get_int(self, key: str, section :str = 'global'):
+    def get_int(self, key: str, section: str = 'global'):
         """
         Return the value of the config key
         :param key: The key
+        :param section: config file section
         :return: The value
         """
-        return self.config.get(section, key).getint()
+        return self.config.getint(section, key)
 
-    def get_str(self, key: str, section :str = 'global' ):
+    def get_str(self, key: str, section: str = 'global'):
         """
         Return the value of the config key
         :param key: The key
+        :param section: config file section
         :return: The value
         """
         return self.config.get(section, key)
