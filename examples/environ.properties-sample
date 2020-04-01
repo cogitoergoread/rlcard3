@@ -14,3 +14,9 @@ nr_players = 4
 nr_cards=55
 
 train_every = 1
+
+[cfg.compare]
+nr_games = 500
+stat_dir_path = '/mnt/data/muszi/mocsar_stat'
+batch_name = '3RAS_DqPyt'
+agent_list = 'RRMM,RRRM'

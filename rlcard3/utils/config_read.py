@@ -26,10 +26,18 @@ class Config:
 
             return config
 
-    def get_int(self, key: str):
+    def get_int(self, key: str, section :str = 'global'):
         """
         Return the value of the config key
         :param key: The key
         :return: The value
         """
-        return int(self.config.get('global', key))
+        return self.config.get(section, key).getint()
+
+    def get_str(self, key: str, section :str = 'global' ):
+        """
+        Return the value of the config key
+        :param key: The key
+        :return: The value
+        """
+        return self.config.get(section, key)

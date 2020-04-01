@@ -5,6 +5,7 @@
     Date created: 3/30/2020
 """
 import aenum
+from typing import List,Dict
 
 
 class MocsarAgentDB(aenum.AutoNumberEnum):
@@ -30,3 +31,22 @@ def get_by_id(aid: str):
     for ag in MocsarAgentDB:
         if ag.aid == aid:
             return ag
+
+def str_to_agentdict(agent_str_list: str) -> List[Dict]:
+    """
+    Returns the corresponding enum by id
+    :param agent_str_list: CSV list of agent IDs, like 'RRMM,RRRM'
+    :return: Enum itself
+    """
+    ret = list()
+    agents_list = string.split(agent_str_list, ",")
+    for agents in agents_list:
+        ag_di = dict()
+        for aid in agents:
+            agent_id = get_by_id(aid=aid).agent_id
+            if agent_id in list(ag_di.keys()):
+                ag_di[agent_id] += 1
+            else:
+                ag_di[agent_id] = 1
+        ret.append(ag_di)
+    return ret
