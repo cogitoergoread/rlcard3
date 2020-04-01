@@ -1,6 +1,6 @@
 """
     Mocsár Database of different mocsar agents
-    File name: games/mocsar/agent_db.py
+    File name: games/mocsar/agentdb.py
     Author: József Varga
     Date created: 3/30/2020
 """
@@ -11,7 +11,7 @@ class MocsarAgentDB(aenum.AutoNumberEnum):
     """
     Mocsár agentek nyilvántartása
     """
-    _init_ = 'aid name agent_id'
+    _init_ = 'aid aname agent_id'
 
     PDQN = 'd', 'PreDQNAgent', "mocsar_predqn"
     PNFT = "j", "PreNFSPPytorch", 'mocsar-nfsp-pytorch'

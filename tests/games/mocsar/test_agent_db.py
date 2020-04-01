@@ -1,6 +1,6 @@
-from rlcard3.games.mocsar.agent_db import MocsarAgentDB
-from rlcard3.games.mocsar.agent_db import get_by_id
 import pytest
+from rlcard3.games.mocsar.agentdb import get_by_id, MocsarAgentDB
+
 
 testdata_init = [
     pytest.param('d', 'PreDQNAgent', "mocsar_predqn", id="d"),
@@ -16,6 +16,6 @@ testdata_init = [
 def test_enums(aid, name, agent_id):
     ae: MocsarAgentDB
     ae = get_by_id(aid)
-    assert ae.id == aid
-    assert ae.name == name
+    assert ae.aid == aid
+    assert ae.aname == name
     assert ae.agent_id == agent_id
