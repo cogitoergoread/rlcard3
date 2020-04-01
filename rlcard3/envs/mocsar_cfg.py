@@ -12,7 +12,7 @@ from rlcard3.games.mocsar.stat import MocsarStat
 import numpy as np
 import random
 
-from rlcard3.games.mocsar.utils import encode_to_obs
+from rlcard3.games.mocsar.utils import encode_to_obs, string_to_action
 
 
 class MocsarCfgEnv(MocsarEnv):
@@ -55,7 +55,10 @@ class MocsarCfgEnv(MocsarEnv):
             if a_extract and not state['is_extract']:
                 print("State Conv")
                 # Az Agent számára obs status kell, de nem az van
-                step_state = encode_to_obs(state=state)
+                step_state = {'obs': encode_to_obs(state=state),
+                           'legal_actions': [string_to_action(action) for action in state['legal_actions'] ] ,
+                           'is_extract': True  # State is extracted>
+                           }
                 print(step_state)
             else:
                 step_state =state
