@@ -78,12 +78,21 @@ LOG_SAVE_PRFX = 'f:/tmp/rlcard2log'
 # ]
 
 # rlcard3, Min - Random
-log_dirname = '3RAS_RAMI_20200328-164129'
-log_filename = '500_20200328-164650.csv'
+# log_dirname = '3RAS_RAMI_20200328-164129'
+# log_filename = '500_20200328-164650.csv'
+# plot_list = [
+#     ('MMRR', "Payoff distribution for 2 Min and 2 Random agents", True, "Ag2vs2V"),
+#     ('MRRR', "Payoff distribution for 1 Min and 3 RANDOM agents", True, "Ag2vs2V"),
+#     ('MMRR', "RAS, Mean payoff for 2 Min and 2 Random agents", False, "Ag2vs2L"),
+# ]
+# Rlcard DQN Agent!
+log_dirname = '3RAS_DqPyt_20200401-202024'
+log_filename = '500_20200401-204257.csv'
 plot_list = [
-    ('MMRR', "Payoff distribution for 2 Min and 2 Random agents", True, "Ag2vs2V"),
-    ('MRRR', "Payoff distribution for 1 Min and 3 RANDOM agents", True, "Ag2vs2V"),
-    ('MMRR', "RAS, Mean payoff for 2 Min and 2 Random agents", False, "Ag2vs2L"),
+    ('RRkk', "Payoff distribution for 2 DQN Torch and 2 Random agents", True, "Ag2vs2V"),
+    ('RRkk', "RAS, Mean payoff for 2 Random and 2 DQN Torch agents", False, "Ag2vs2L"),
+    ('MMkk', "Payoff distribution for 2 DQN Torch and 2 Min agents", True, "Ag2vs2V"),
+    ('MMkk', "RAS, Mean payoff for 2 Min and 2 DQN Torch agents", False, "Ag2vs2L"),
 ]
 
 def read_data() -> pd.DataFrame:
