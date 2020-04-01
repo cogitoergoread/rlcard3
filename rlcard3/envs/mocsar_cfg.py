@@ -7,9 +7,12 @@
 
 from rlcard3 import models
 from rlcard3.envs.mocsar import MocsarEnv
+from rlcard3.games.mocsar.agentdb import get_by_id
 from rlcard3.games.mocsar.stat import MocsarStat
 import numpy as np
 import random
+
+from rlcard3.games.mocsar.utils import encode_to_obs
 
 
 class MocsarCfgEnv(MocsarEnv):
@@ -46,10 +49,17 @@ class MocsarCfgEnv(MocsarEnv):
         stat.add_startgame()
 
         while not self.is_over():
-            if self.model.use_raw:
-                action, _ = self.model.agents[player_id].eval_step(state)
+            agent = self.model.agents[player_id]
+            a_extract = get_by_id(aid=agent.id).a_extracted
+            if a_extract and not state['is_extract']:
+                # Az Agent számára obs status kell, de nem az van
+                step_state = encode_to_obs(state=state)
             else:
-                action, _ = self.model.agents[player_id].eval_step(self._extract_state(state))
+                step_state =state
+            if self.model.use_raw:
+                action, _ = agent.eval_step(step_state)
+            else:
+                action, _ = agent.eval_step(self._extract_state(step_state))
 
             if state['is_extract']:
                 # self.game.step() requires str action

@@ -12,14 +12,14 @@ class MocsarAgentDB(aenum.AutoNumberEnum):
     """
     Mocsár agentek nyilvántartása
     """
-    _init_ = 'aid aname agent_id'
+    _init_ = 'aid aname agent_id a_extracted'
 
-    PDQN = 'd', 'PreDQNAgent', "mocsar_predqn"
-    PNFT = "j", "PreNFSPPytorch", 'mocsar-nfsp-pytorch'
-    PDQT = "k", "PreDQNPytorch", 'mocsar-dqn-pytorch'
-    HUMN = "H", 'HumanAgent', "mocsar_human"
-    RMIN = "M", 'MinAgent', "mocsar_min"
-    RRAN = "R", 'RandomAgent', "mocsar_random"
+    PDQN = 'd', 'PreDQNAgent', "mocsar_predqn", True
+    PNFT = "j", "PreNFSPPytorch", 'mocsar-nfsp-pytorch', True
+    PDQT = "k", "PreDQNPytorch", 'mocsar-dqn-pytorch', True
+    HUMN = "H", 'HumanAgent', "mocsar_human", False
+    RMIN = "M", 'MinAgent', "mocsar_min", False
+    RRAN = "R", 'RandomAgent', "mocsar_random", False
 
 
 def get_by_id(aid: str):
