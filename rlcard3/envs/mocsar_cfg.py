@@ -60,9 +60,9 @@ class MocsarCfgEnv(MocsarEnv):
             else:
                 step_state =state
             if self.model.use_raw:
-                action, _ = agent.eval_step(step_state)
+                action = agent.step(step_state)
             else:
-                action, _ = agent.eval_step(self._extract_state(step_state))
+                action = agent.step(self._extract_state(step_state))
 
             if state['is_extract']:
                 # self.game.step() requires str action
