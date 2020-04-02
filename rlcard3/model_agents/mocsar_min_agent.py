@@ -35,7 +35,7 @@ class MocsarMinAgent(Agent):
             # Ha nincs miből választani
             return action_to_ret(action_ids[0], is_extract)
         elif action_ids[0] == 0:
-            # a lehet választani, akor nem passzol
+            # ha lehet választani, akor nem passzol
             return action_to_ret(min(action_ids[1:]), is_extract)
         return action_to_ret(min(action_ids), is_extract)
 
