@@ -173,7 +173,6 @@ class NFSPAgent(object):
         '''
         obs = state['obs']
         legal_actions = state['legal_actions']
-        print(f'Obs:{obs}')
         if self._mode == MODE.best_response:
             probs = self._rl_agent.predict(obs)
             self._add_transition(obs, probs)
