@@ -30,8 +30,8 @@ class Action(IntEnum):
     Action definíciók
     """
     PS = 0  # Pass
-    M2 = 1  # minden kettes, ha nem Jker
-    M3 = 2  # Minden 3-as, ill 3as felülütve
+    M2 = 1  # minden kettes, ha nem Joker
+    M3 = 2  # Minden 3-as, ill 3-as felülütve
     M4 = 3
     M5 = 4
     M6 = 5
@@ -43,7 +43,7 @@ class Action(IntEnum):
     MQ = 11
     MK = 12
     MA = 13
-    MO = 14
+    MO = 14  # Jokerrel felülütve, ill. minden joker
     J2 = 15  # Minden kettes az összes jokerrel
     J3 = 16
     J4 = 17
@@ -56,9 +56,9 @@ class Action(IntEnum):
     JJ = 24
     JQ = 25
     JK = 26
-    JA = 27
+    JA = 27  # Minden Ász és össze joker
     O2 = 28  # Egy darab 2, ha nincs Jokerre mapaelve
-    O3 = 29
+    O3 = 29  # Egy db hármas
     O4 = 30
     O5 = 31
     O6 = 32
@@ -69,21 +69,22 @@ class Action(IntEnum):
     OJ = 37
     OQ = 38
     OK = 39
-    OA = 40
+    OA = 40  # Egy Db Ász
 
-    def get_rank(self) ->int:
+    def get_rank(self) -> int:
         """
         Returns the rank of the action, pass has no rank and raise an Exception
         :return: Rank
         """
         return Ertekek(self.name[1]).value
 
-    def get_mode(self)->str:
+    def get_mode(self) -> str:
         """
         Returns the Action mode of the action , first character, M,J,O
         :return: action mode
         """
         return self.name[0]
+
 
 def _action_konstruktor(cls, value):
     if not isinstance(value, str):
