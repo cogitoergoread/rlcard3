@@ -20,6 +20,7 @@ class MocsarAgentDB(aenum.AutoNumberEnum):
     HUMN = "H", 'HumanAgent', "mocsar_human", False
     RMIN = "M", 'MinAgent', "mocsar_min", False
     RRAN = "R", 'RandomAgent', "mocsar_random", False
+    RPLS = "P", "MinPlus", "mocsar_minplus", False
 
 
 def get_by_id(aid: str):
@@ -32,8 +33,22 @@ def get_by_id(aid: str):
         if ag.aid == aid:
             return ag
 
+def str_to_agent_dict(agent_str:str, dict_type_agentid:bool = True)->Dict:
+    """
+    Returns a dictionary of agents, key is Agent_id, value nr of agents
+    :param agent_str: Agent ID str, like RRMM: Two Random and Two min agents
+    :return: dict
+    """
+    ag_di = dict()
+    for aid in agent_str:
+        if dict_type_agentid:
+            agent_id = get_by_id(aid=aid).agent_id
+        else:
+            agent_id = get_by_id(aid=aid).aid
+        ag_di[agent_id] = 1 + ag_di.get(agent_id, 0)
+    return ag_di
 
-def str_to_agentdict(agent_str_list: str) -> List[Dict]:
+def str_to_agent_list(agent_str_list: str) -> List[Dict]:
     """
     Returns the corresponding enum by id
     :param agent_str_list: CSV list of agent IDs, like 'RRMM,RRRM'
@@ -42,12 +57,5 @@ def str_to_agentdict(agent_str_list: str) -> List[Dict]:
     ret = list()
     agents_list = str.split(agent_str_list, ",")
     for agents in agents_list:
-        ag_di = dict()
-        for aid in agents:
-            agent_id = get_by_id(aid=aid).agent_id
-            if agent_id in list(ag_di.keys()):
-                ag_di[agent_id] += 1
-            else:
-                ag_di[agent_id] = 1
-        ret.append(ag_di)
+        ret.append(str_to_agent_dict(agents))
     return ret

@@ -15,7 +15,7 @@ class Env(object):
             game (Game): The Game class
             config (dict): A config dictionary. Currently, the dictionary
                 includes
-                'allow_step_bac'k (boolean) - True if allowing
+                'allow_step_back' (boolean) - True if allowing
                  step_back
                 'allow_raw_data' (boolean) - True if allow
                  raw obs in state['raw_obs'] and raw legal actions in

@@ -418,32 +418,40 @@ def payoff_func(position: int, num_players: int) -> float:
     else:
         return 0
 
-
-def print_state(state: Dict):
-    """Print out the nicely formatted state"""
-    is_extract = state['is_extract']
-    if is_extract:
+def state_to_tuple(state: Dict):
+    """
+    Convert a state into elements
+    :param state: Extracted state or full state
+    :return: tuple: (s_hand_list, s_o_hand_list, s_nr_cards, s_lpr, s_plid)
+    """
+    if state['is_extract']:
         obs_state = decode_obs(state['obs'])
-        s_hand  = obs_state['hand']
-        s_o_hand= obs_state['others_hand']
+        s_hand = obs_state['hand']
+        s_o_hand = obs_state['others_hand']
         s_nr_cards = obs_state['nr_cards_round']
         s_lpr = obs_state['last_played_rank']
         s_plid = '??'
     else:
-        s_hand  = state['hand']
-        s_o_hand= state['others_hand']
+        s_hand = state['hand']
+        s_o_hand = state['others_hand']
         s_nr_cards = state['nr_cards_round']
         s_lpr = state['last_played_rank']
         s_plid = state['player_id'].__str__()
-
-    legal_actids = get_action_ids(legal_actions=state['legal_actions'],
-                                  is_extracted=is_extract)
-    s_hand_list= str_to_card_list(s_hand)
+    s_hand_list = str_to_card_list(s_hand)
     s_hand_list.sort()
-    s_hand = card_list_to_str( s_hand_list )
+
     s_o_hand_list = str_to_card_list(s_o_hand)
     s_o_hand_list.sort()
-    s_o_hand  = card_list_to_str(  s_o_hand_list)
+    return s_hand_list, s_o_hand_list, s_nr_cards, s_lpr, s_plid
+
+def print_state(state: Dict):
+    """Print out the nicely formatted state"""
+    s_hand_list, s_o_hand_list, s_nr_cards, s_lpr, s_plid = state_to_tuple(state)
+
+    legal_actids = get_action_ids(legal_actions=state['legal_actions'],
+                                  is_extracted=state['is_extract'])
+    s_hand = card_list_to_str(s_hand_list)
+    s_o_hand = card_list_to_str(s_o_hand_list)
     print('\n=============== State of the Player ===============')
     print(f"Player:{s_plid}, Own hand:{s_hand}")
     print(f"Round, nr of cards:{s_nr_cards}, Last played rank:{s_lpr}, Card {'234567890JQKA*'[s_lpr]} ")

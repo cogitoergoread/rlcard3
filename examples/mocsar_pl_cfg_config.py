@@ -7,7 +7,7 @@
 """
 
 import rlcard3
-from rlcard3.games.mocsar.agentdb import str_to_agentdict
+from rlcard3.games.mocsar.agentdb import str_to_agent_list
 from rlcard3.games.mocsar.stat import MocsarStat
 from rlcard3.utils.config_read import Config
 
@@ -27,7 +27,7 @@ stat = MocsarStat(game=env.game,
                                        key='stat_dir_path'))
 
 # Register agents
-agents_list = str_to_agentdict(agent_str_list=conf.get_str(section='cfg.compare', key="agent_list"))
+agents_list = str_to_agent_list(agent_str_list=conf.get_str(section='cfg.compare', key="agent_list"))
 print(f"mocsar_pl_cfg_config, Agents:{agents_list}")
 # Try different agent combinations
 # List of nr of cards
