@@ -18,7 +18,7 @@ from rlcard3.utils.logger import Logger
 # Config
 conf = Config('environ.properties')
 # Environemtn
-env, eval_env = init_environment(conf=conf, env_id='mocsar')
+env, eval_env = init_environment(conf=conf, env_id='mocsar-cfg', config= {'multi_agent_mode': True})
 # parameter variables
 evaluate_num, evaluate_every, memory_init_size, train_every, episode_num = init_vars(conf=conf)
 # The paths for saving the logs and learning curves
