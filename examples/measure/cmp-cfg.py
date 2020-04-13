@@ -6,7 +6,8 @@
 """
 import os
 from typing import List
-
+import io
+from urllib.request import urlopen
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
@@ -22,10 +23,19 @@ log_dirname = conf.get_str(section='cfg.visual', key="dir_name")
 log_filename = conf.get_str(section='cfg.visual', key="file_name")
 
 
-def read_data() -> pd.DataFrame:
+def read_data_local() -> pd.DataFrame:
     csv_file_name = os.path.join(LOG_SAVE_PRFX, log_dirname, log_filename)
-    dfr = pd.read_csv(csv_file_name, sep=";")
+    dfr = pd.read_csv(csv_file_name, sep=";", usecols=["cardnr", "agentid", "agentstr", "payoff"])
     return dfr
+
+def read_data_github(csv_url:str) -> pd.DataFrame:
+    r1 = urlopen(csv_url)
+
+    df1 = pd.read_csv(io.BytesIO(r1.read()),
+                      compression='gzip',
+                      sep=";",
+                      usecols=["cardnr", "agentid", "agentstr", "payoff"])
+    return df1
 
 
 def create_plots(df: pd.DataFrame, agentstr: str, plot_type: str):
@@ -35,39 +45,37 @@ def create_plots(df: pd.DataFrame, agentstr: str, plot_type: str):
     :param agentstr: Which type of data to display
     :param plot_type: VIO: Violin plot, LIN: Line plot
     """
-    if plot_type == 'VIO':
-        # Violin plot comparing agent performace
-        ag_di = str_to_agent_dict(agentstr, False)
-        ag_1, ag_2 = get_by_id(list(ag_di.keys())[0]), get_by_id(list(ag_di.keys())[1])
-        title = f"Payoff distribution for {ag_di[ag_1.aid]} {ag_1.aname} and {ag_di[ag_2.aid]} {ag_2.aname}"
-        plt_filename = f"Ag2vs2V_{agentstr}.png"
-        _ = sns.violinplot(x="cardnr", y="payoff", data=df[(df['agentstr'] == agentstr)], hue="agentid",
-                           split=True).set_title(title)
-    elif plot_type == 'LIN':
-        # Line plot comparing agent vs agent results
-        ag_di = str_to_agent_dict(agentstr, False)
-        ag_1, ag_2 = get_by_id(list(ag_di.keys())[0]), get_by_id(list(ag_di.keys())[1])
-        title = f"Mean payoff for {ag_di[ag_1.aid]} {ag_1.aname} and {ag_di[ag_2.aid]} {ag_2.aname}"
-        plt_filename = f"Ag2vs2L_{agentstr}.png"
-        _ = sns.relplot(x="cardnr", y="payoff", kind="line", data=df[(df['agentstr'] == agentstr)], hue="agentid")
-        plt.title(title)
-        plt.tight_layout()
-        plt.subplots_adjust(top=0.88)
-    elif plot_type =="CMP":
+    if plot_type == "CMP":
         # Compare performance against Random agents
         agentstrli = agentstr.split('-')
-        ag_li_str = ','.join([  get_by_id(agstr.replace("R", "")[0]).aname  for agstr in agentstrli])
+        ag_li_str = ','.join([get_by_id(agstr.replace("R", "")[0]).aname for agstr in agentstrli])
 
         # Plays from the list
         df2 = df[df.agentstr.isin(agentstrli)]
         # Filter out the result of a RandomAgent
         df2 = df2[df2['agentid'] != 'R']
-        title = f"Mean payoff against Random agent for {ag_li_str}"
-        plt_filename = f"Randvs2Ags2L_{ag_li_str}.png"
+        title = f"Mean payoff against Random agent for {ag_li_str[:20]}"
+        plt_filename = "Randvs2Ags2L.png"
         _ = sns.relplot(x="cardnr", y="payoff", kind="line", data=df2, hue="agentstr")
-        plt.title(title)
-        plt.tight_layout()
-        plt.subplots_adjust(top=0.88)
+    else:
+        ag_di = str_to_agent_dict(agentstr, False)
+        ag_1, ag_2 = get_by_id(list(ag_di.keys())[0]), get_by_id(list(ag_di.keys())[1])
+
+        if plot_type == 'VIO':
+            # Violin plot comparing agent performace
+            title = f"Payoff distribution for {ag_di[ag_1.aid]} {ag_1.aname} and {ag_di[ag_2.aid]} {ag_2.aname}"
+            plt_filename = f"Ag2vs2V_{agentstr}.png"
+            _ = sns.violinplot(x="cardnr", y="payoff", data=df[(df['agentstr'] == agentstr)], hue="agentid",
+                               split=True)
+        elif plot_type == 'LIN':
+            # Line plot comparing agent vs agent results
+            title = f"Mean payoff for {ag_di[ag_1.aid]} {ag_1.aname} and {ag_di[ag_2.aid]} {ag_2.aname}"
+            plt_filename = f"Ag2vs2L_{agentstr}.png"
+            _ = sns.relplot(x="cardnr", y="payoff", kind="line", data=df[(df['agentstr'] == agentstr)], hue="agentid")
+    plt.title(title)
+    #plt.tight_layout()
+    plt.subplots_adjust(top=0.88)
+
     dir_path = os.path.join(PNG_SAVE_PRFX, log_dirname)
     if not os.path.exists(dir_path):
         os.makedirs(dir_path)
@@ -77,10 +85,14 @@ def create_plots(df: pd.DataFrame, agentstr: str, plot_type: str):
 
 
 def plot_list_items(pl_list: List):
-    df = read_data()
+    df = read_data_local()
     for plot_element in pl_list:
         plot_type, agentstr = plot_element.split(':')
         create_plots(df, agentstr, plot_type)
 
 
-plot_list_items(conf.get_str(section='cfg.visual', key="plot_list").split(','))
+#plot_list_items(conf.get_str(section='cfg.visual', key="plot_list").split(','))
+df2 = read_data_github(csv_url='https://github.com/cogitoergoread/rlcard3/raw/master/jupyter/data'
+                               '/3RAS_Rule_vs_RLAI_1000_20200413-115349.csv.gz')
+# create_plots(df2, 'kkll', 'LIN')
+create_plots(df2, 'RRkk-RRll-RRii-RRjj-PPRR', 'CMP')
