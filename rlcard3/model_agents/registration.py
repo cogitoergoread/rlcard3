@@ -98,8 +98,8 @@ def get_agents(agents: Dict, nr_players: int, action_num: int, state_shape: List
                                       num_players=nr_players,
                                       action_num= action_num,
                                       state_shape=state_shape).agents
-            for i in range(nr_agents):
-                agent_list.append(nfsp_agents[i])
+            for j in range(nr_agents):
+                agent_list.append(nfsp_agents[j])
                 i += 1
                 if i >= nr_players:
                     return agent_list
