@@ -33,6 +33,22 @@ class MocsarCfgEnv(MocsarEnv):
                            action_num =self.game.get_action_num(),
                            state_shape = self.state_shape)
 
+    def init_game(self):
+        ''' Start a new game
+
+        Returns:
+            (tuple): Tuple containing:
+
+                (numpy.array): The begining state of the game
+                (int): The begining player
+        '''
+        state, player_id = self.game.init_game()
+        if self.record_action:
+            self.action_recorder = []
+        print(f"Agents: {[ ag.name for ag in self.agents]}")
+        print(f"Model agents: {[ ag.name for ag in self.model.agents]}")
+        return self._extract_state(state), player_id
+
     def run_multi_agent(self, stat: MocsarStat, seed: int = None):
         """
         Run a game with multiple agents. Can use Raw models

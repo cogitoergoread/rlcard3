@@ -43,7 +43,7 @@ print(f"mocsar_pl_dqn_pytorch_load_model_cfg, Agents:{agents}")
 env.game.set_game_params(num_players=4, num_cards=nr_cards)
 env.model.create_agents(agents)
 
-if NR_GAMES == 2:
+if NR_GAMES % 2 == 0:
     env.set_agents(env.model.rule_agents)
     reward = tournament(env, NR_GAMES)[0]
     print(f'Average reward for {agent_str} against random agent: {reward}, cards: {nr_cards} ')
