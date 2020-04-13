@@ -54,6 +54,7 @@ class MocsarRandomAgent(Agent):
                 ret = 0
             else:
                 ret = int(np.random.choice(action_ids))
+        print(f"**Random Agent: ActionIds:{action_ids}, Ret: {ret}")
         return action_to_ret(action=ret, is_extracted=is_extract)
 
     def eval_step(self, state: Dict):
