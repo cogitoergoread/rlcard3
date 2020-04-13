@@ -31,7 +31,7 @@ class MocsarRound(object):
     def __init__(self, current_player_index: int, nr_players_in_round: int):
         """ When the round starts, init the values
         """
-        self.print_mode = True
+        self.print_mode = False
         self.new_round(current_player_index, nr_players_in_round)
 
     def new_round(self, current_player_index: int, nr_players_in_round: int):
