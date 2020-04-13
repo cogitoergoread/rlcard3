@@ -104,7 +104,8 @@ def get_agents(agents: Dict, nr_players: int, action_num: int, state_shape: List
                 if i >= nr_players:
                     return agent_list
         for _ in range(nr_agents):
-            if agent_id == 'mocsar-dqn-pytorch':
+            if agent_id in [ 'mocsar-dqn-pytorch', 'mocsar-dqn-pytorchr',
+                             'mocsar-nfsp-pytorch', 'mocsar-nfsp-pytorchm']:
                 # Pre trained model from rlcard3.models.pretrained_models, DQN
                 rule_agent = models.load(agent_id,
                                       num_players=nr_players,
