@@ -5,7 +5,6 @@
     Date created: 4/14/2020
 """
 import rlcard3
-from rlcard3 import models
 from rlcard3.games.mocsar.stat import MocsarStat
 from rlcard3.utils.config_read import Config
 from rlcard3.utils.utils import tournament
@@ -26,7 +25,6 @@ stat = MocsarStat(game=env.game,
                                        key='stat_dir_path'))
 
 # Register agents
-evaluate_num = conf.get_int(section='cfg.compare', key='nr_games')
 agent_str = conf.get_str(section='cfg.compare', key="agent_str")
 nr_cards = conf.get_int(section='global', key='nr_cards')
 
@@ -44,6 +42,15 @@ print(f"mocsar_pl_dqn_pytorch_load_model_cfg, Agents:{agents}")
 
 env.game.set_game_params(num_players=4, num_cards=nr_cards)
 env.model.create_agents(agents)
-env.set_agents(env.model.rule_agents)
-reward = tournament(env, evaluate_num)[0]
-print(f'Average reward for {agent_str} against random agent: {reward}, cards: {nr_cards} ')
+
+if NR_GAMES == 2:
+    env.set_agents(env.model.rule_agents)
+    reward = tournament(env, NR_GAMES)[0]
+    print(f'Average reward for {agent_str} against random agent: {reward}, cards: {nr_cards} ')
+
+else:
+    stat.reset_game_nr(agents=env.model.rule_agents)
+    print(f"Game for cards:{nr_cards}, agents:{stat.agentstr} ")
+    for i in range(NR_GAMES):
+        state, payoffs, done = env.run_multi_agent(stat=stat)
+        print(f"-----------\nGame Finished.{i}.game, payoff: {payoffs[0]}")
