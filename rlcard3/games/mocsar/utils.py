@@ -45,16 +45,20 @@ def init_deck(nr_cards: int):
     return res
 
 
-def card_list_to_str(cards: List[Card]) -> str:
+def card_list_to_str(cards: List[Card], is_ordered: bool = False) -> str:
     """
     Convert List of Cards to String.
+    :param is_ordered: Whether to sort the list
     :param cards: List of cards to convert
     :return: String representation, eg '[♣2,♡2,♢2,♠2,♣A,♡A,♢A,♠A,**]'
     """
+    cards_to_print = cards.copy()
+    if is_ordered:
+        cards_to_print.sort()
     ret = "["
-    deck_len = len(cards)
+    deck_len = len(cards_to_print)
     for i in range(deck_len):
-        ret += cards[i].__str__()
+        ret += cards_to_print[i].__str__()
         if i < deck_len - 1:
             ret += ','
     ret += ']'
@@ -418,6 +422,7 @@ def payoff_func(position: int, num_players: int) -> float:
     else:
         return 0
 
+
 def state_to_tuple(state: Dict):
     """
     Convert a state into elements
@@ -443,6 +448,7 @@ def state_to_tuple(state: Dict):
     s_o_hand_list = str_to_card_list(s_o_hand)
     s_o_hand_list.sort()
     return s_hand_list, s_o_hand_list, s_nr_cards, s_lpr, s_plid
+
 
 def print_state(state: Dict):
     """Print out the nicely formatted state"""

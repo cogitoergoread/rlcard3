@@ -2,6 +2,7 @@
 """
 from rlcard3.games.mocsar.utils import card_list_to_str
 
+
 class MocsarPlayer(object):
 
     def __init__(self, player_id):
@@ -39,4 +40,4 @@ class MocsarPlayer(object):
         return f"{self.player_id}:{self.name}"
 
     def __repr__(self):
-        return self.__str__() + " " + card_list_to_str(self.hand)
+        return self.__str__() + " " + card_list_to_str(cards=self.hand, is_ordered=True)

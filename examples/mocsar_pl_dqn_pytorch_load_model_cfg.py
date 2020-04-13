@@ -51,6 +51,9 @@ if NR_GAMES == 2:
 else:
     stat.reset_game_nr(agents=env.model.rule_agents)
     print(f"Game for cards:{nr_cards}, agents:{stat.agentstr} ")
+    payoff_total = 0
     for i in range(NR_GAMES):
         state, payoffs, done = env.run_multi_agent(stat=stat)
+        payoff_total += payoffs[0]
         print(f"-----------\nGame Finished.{i}.game, payoff: {payoffs[0]}")
+    print(f'Average reward for {agent_str} against random agent: {payoff_total / NR_GAMES}, cards: {nr_cards} ')
