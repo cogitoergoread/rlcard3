@@ -69,7 +69,7 @@ class Ertekek(IntEnum):
     def __str__(self):
         """
         Stringgé alakítja az értéket.
-        :return: Szín Unicode karakterként
+        :return: Érték Unicode karakterként
         """
         return '234567890JQKA*'[self.value]
 

@@ -20,10 +20,16 @@ if 'torch' in installed_packages:
     register(
         model_id='mocsar-nfsp-pytorch',
         entry_point='rlcard3.models.pretrained_models:MocsarPreNFSPPytorchModel')
+    register(
+        model_id='mocsar-nfsp-pytorchm',
+        entry_point='rlcard3.models.pretrained_models:MocsarPreNFSPPytorchModelMin')
 
     register(
         model_id='mocsar-dqn-pytorch',
         entry_point='rlcard3.models.pretrained_models:MocsarPreDQNPytorchModel')
+    register(
+        model_id='mocsar-dqn-pytorchr',
+        entry_point='rlcard3.models.pretrained_models:MocsarPreDQNPytorchModelRan')
 
 
 

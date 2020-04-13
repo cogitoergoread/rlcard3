@@ -117,7 +117,7 @@ class LeducHoldemCFRModel(Model):
 
 
 class MocsarPreNFSPPytorchModel(Model):
-    ''' A pretrained PyTorch model on Mocsar with NFSP
+    ''' A pretrained PyTorch model on Mocsar with NFSP, learnt against itself
     '''
 
     def __init__(self, **kwargs):
@@ -156,30 +156,28 @@ class MocsarPreNFSPPytorchModel(Model):
         return self.nfsp_agents
 
 
-class MocsarPreDQNPytorchModel(Model):
-    ''' A pretrained PyTorch model on Mocsar with NFSP
+class MocsarPreNFSPPytorchModelMin(MocsarPreNFSPPytorchModel):
+    ''' A pretrained PyTorch model on Mocsar with NFSP, learnt against 3 MIn agents
     '''
 
     def __init__(self, **kwargs):
         ''' Load pretrained model
         '''
         import torch
-        from rlcard3.agents.dqn_agent_pytorch import DQNAgent as DQNAgentPytorch
+        from rlcard3.agents.nfsp_agent_pytorch import NFSPAgent as NFSPAgentPytorch
         num_players, action_num, state_shape = kwargs['num_players'], kwargs['action_num'], kwargs['state_shape']
-        self.agent = DQNAgentPytorch(scope='dqn',
-                                     action_num=action_num,
-                                     replay_memory_init_size=1000,  # Not important while not training
-                                     train_every=1,  # Not important while not training
-                                     state_shape=state_shape,
-                                     mlp_layers=[512, 512],
-                                     device=torch.device('cuda'))
+        self.agent = NFSPAgentPytorch(scope='nfsp',
+                                      action_num=action_num,
+                                      state_shape=state_shape,
+                                      hidden_layers_sizes=[512, 512],
+                                      q_mlp_layers=[512, 512],
+                                      device=torch.device('cuda'))
 
-        check_point_path = os.path.join(ROOT_PATH, 'mocsar_dqn_ra_pytorch/model.pth')
+        check_point_path = os.path.join(ROOT_PATH, 'mocsar_nfsp_pytorch/model_min.pth')
         checkpoint = torch.load(check_point_path)
+        self.agent.id = "i"
+        self.agent.name = "PreNFSPPytorchMin"
         self.agent.load(checkpoint)
-        self.num_players = num_players
-        self.agent.id = "k"
-        self.agent.name = "PreDQNPytorch"
 
     @property
     def agents(self):
@@ -191,4 +189,55 @@ class MocsarPreDQNPytorchModel(Model):
         Note: Each agent should be just like RL agent with step and eval_step
               functioning well.
         '''
-        return [ self.agent for _ in range(self.num_players)]
+        return [self.agent for _ in range(self.num_players)]
+
+
+class MocsarPreDQNPytorchModel(Model):
+    ''' A pretrained PyTorch model on Mocsar with DQN, against Min agents
+    '''
+
+    def __init__(self, **kwargs):
+        ''' Load pretrained model
+        '''
+        import torch
+        from rlcard3.agents.dqn_agent_pytorch import DQNAgent as DQNAgentPytorch
+        num_players, action_num, state_shape = kwargs['num_players'], kwargs['action_num'], kwargs['state_shape']
+        self.num_players = num_players
+        self.agent = DQNAgentPytorch(scope='dqn',
+                                     action_num=action_num,
+                                     replay_memory_init_size=1000,  # Not important while not training
+                                     train_every=1,  # Not important while not training
+                                     state_shape=state_shape,
+                                     mlp_layers=[512, 512],
+                                     device=torch.device('cuda'))
+        self._local_init()
+
+    def _local_init(self):
+        self._init_end(chkp='mocsar_dqn_ra_pytorch/model.pth', aid="k", aname="PreDQNPytorch")
+
+    def _init_end(self, chkp: str, aid: str, aname: str):
+        check_point_path = os.path.join(ROOT_PATH, chkp)
+        checkpoint = torch.load(check_point_path)
+        self.agent.load(checkpoint)
+        self.agent.id = aid
+        self.agent.name = aname
+
+    @property
+    def agents(self):
+        ''' Get a list of agents for each position in a the game
+
+        Returns:
+            agents (list): A list of agents
+
+        Note: Each agent should be just like RL agent with step and eval_step
+              functioning well.
+        '''
+        return [self.agent for _ in range(self.num_players)]
+
+
+class MocsarPreDQNPytorchModelRan(MocsarPreDQNPytorchModel):
+    ''' A pretrained PyTorch model on Mocsar with DQN, Against Random agents
+    '''
+
+    def _local_init(self):
+        self._init_end(chkp='mocsar_dqn_ra_pytorch/model_random.pth', aid="l", aname="PreDQNPytorchRan")

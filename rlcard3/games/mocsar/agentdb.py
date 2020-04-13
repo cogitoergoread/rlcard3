@@ -15,8 +15,10 @@ class MocsarAgentDB(aenum.AutoNumberEnum):
     _init_ = 'aid aname agent_id a_extracted'
 
     PDQN = 'd', 'PreDQNAgent', "mocsar_predqn", True
-    PNFT = "j", "PreNFSPPytorch", 'mocsar-nfsp-pytorch', True
-    PDQT = "k", "PreDQNPytorch", 'mocsar-dqn-pytorch', True
+    PNFM = "i", "PreNFSPPytorchMin", 'mocsar-nfsp-pytorchm', True  # Trained against 3 Min agents
+    PNFT = "j", "PreNFSPPytorch", 'mocsar-nfsp-pytorch', True  # Trained from itself
+    PDQT = "k", "PreDQNPytorch", 'mocsar-dqn-pytorch', True  # Trained with Min Agents
+    PDQR = "l", "PreDQNPytorchRan", 'mocsar-dqn-pytorchr', True  # Trained against Random Agent
     HUMN = "H", 'HumanAgent', "mocsar_human", False
     RMIN = "M", 'MinAgent', "mocsar_min", False
     RRAN = "R", 'RandomAgent', "mocsar_random", False
@@ -33,10 +35,12 @@ def get_by_id(aid: str):
         if ag.aid == aid:
             return ag
 
-def str_to_agent_dict(agent_str:str, dict_type_agentid:bool = True)->Dict:
+
+def str_to_agent_dict(agent_str: str, dict_type_agentid: bool = True) -> Dict:
     """
     Returns a dictionary of agents, key is Agent_id, value nr of agents
     :param agent_str: Agent ID str, like RRMM: Two Random and Two min agents
+    :param dict_type_agentid: True: agent_id (mocsar_random) / False aid:(M)
     :return: dict
     """
     ag_di = dict()
@@ -47,6 +51,7 @@ def str_to_agent_dict(agent_str:str, dict_type_agentid:bool = True)->Dict:
             agent_id = get_by_id(aid=aid).aid
         ag_di[agent_id] = 1 + ag_di.get(agent_id, 0)
     return ag_di
+
 
 def str_to_agent_list(agent_str_list: str) -> List[Dict]:
     """
