@@ -166,6 +166,7 @@ class MocsarPreNFSPPytorchModelMin(MocsarPreNFSPPytorchModel):
         import torch
         from rlcard3.agents.nfsp_agent_pytorch import NFSPAgent as NFSPAgentPytorch
         num_players, action_num, state_shape = kwargs['num_players'], kwargs['action_num'], kwargs['state_shape']
+        self.num_players = num_players
         self.agent = NFSPAgentPytorch(scope='nfsp',
                                       action_num=action_num,
                                       state_shape=state_shape,
