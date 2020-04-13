@@ -216,6 +216,7 @@ class MocsarPreDQNPytorchModel(Model):
         self._init_end(chkp='mocsar_dqn_ra_pytorch/model.pth', aid="k", aname="PreDQNPytorch")
 
     def _init_end(self, chkp: str, aid: str, aname: str):
+        import torch
         check_point_path = os.path.join(ROOT_PATH, chkp)
         checkpoint = torch.load(check_point_path)
         self.agent.load(checkpoint)
