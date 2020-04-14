@@ -45,17 +45,22 @@ def create_plots(df: pd.DataFrame, agentstr: str, plot_type: str):
     :param agentstr: Which type of data to display
     :param plot_type: VIO: Violin plot, LIN: Line plot
     """
-    if plot_type == "CMP":
+    if plot_type in [ "CMR", 'CMM']:
         # Compare performance against Random agents
         agentstrli = agentstr.split('-')
-        ag_li_str = ','.join([get_by_id(agstr.replace("R", "")[0]).aname for agstr in agentstrli])
+        if plot_type == "CMR":
+            # Filter out the result of a RandomAgent
+            ag_id_str = 'R'
+        else:
+            # Filter out the result of a MinPlus agent
+            ag_id_str = 'M'
+        ag_li_str = ','.join([get_by_id(agstr.replace(ag_id_str , "")[0]).aname for agstr in agentstrli])
 
         # Plays from the list
         df2 = df[df.agentstr.isin(agentstrli)]
-        # Filter out the result of a RandomAgent
-        df2 = df2[df2['agentid'] != 'R']
+        df2 = df2[df2['agentid'] != ag_id_str]
         title = f"Mean payoff against Random agent for {ag_li_str[:20]}"
-        plt_filename = "Randvs2Ags2L.png"
+        plt_filename = f"Randvs2Ags2L_{plot_type}.png"
         _ = sns.relplot(x="cardnr", y="payoff", kind="line", data=df2, hue="agentstr")
     else:
         ag_di = str_to_agent_dict(agentstr, False)
@@ -95,4 +100,5 @@ def plot_list_items(pl_list: List):
 df2 = read_data_github(csv_url='https://github.com/cogitoergoread/rlcard3/raw/master/jupyter/data'
                                '/3RAS_Rule_vs_RLAI_1000_20200414-002659.csv.gz')
 # create_plots(df2, 'kkll', 'LIN')
-create_plots(df2, 'RRkk-RRll-RRii-RRjj-PPRR', 'CMP')
+#create_plots(df2, 'RRkk-RRll-RRii-RRjj-PPRR', 'CMR')
+create_plots(df2, 'MMkk-MMll-MMii-MMjj-MMPP', 'CMM')
