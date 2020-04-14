@@ -96,9 +96,10 @@ def plot_list_items(pl_list: List):
         create_plots(df, agentstr, plot_type)
 
 
-#plot_list_items(conf.get_str(section='cfg.visual', key="plot_list").split(','))
-df2 = read_data_github(csv_url='https://github.com/cogitoergoread/rlcard3/raw/master/jupyter/data'
-                               '/3RAS_Rule_vs_RLAI_1000_20200414-002659.csv.gz')
+plot_list_items(conf.get_str(section='cfg.visual', key="plot_list").split(','))
+
+#df2 = read_data_github(csv_url='https://github.com/cogitoergoread/rlcard3/raw/master/jupyter/data'
+#                               '/3RAS_Rule_vs_RLAI_1000_20200414-002659.csv.gz')
 # create_plots(df2, 'kkll', 'LIN')
 #create_plots(df2, 'RRkk-RRll-RRii-RRjj-PPRR', 'CMR')
-create_plots(df2, 'MMkk-MMll-MMii-MMjj-MMPP', 'CMM')
+#create_plots(df2, 'MMkk-MMll-MMii-MMjj-MMPP', 'CMM')
