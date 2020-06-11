@@ -100,50 +100,50 @@ TESTDATA=StringIO(""""s_betap1";"s_mikro1";"s_teafozo";"s_kavefozo";"s_mikro2";"
 5.517222222222222;0.009444444444444445;0.0;1.74;0.31805555555555554;0.0;0.013888888888888888;1583447400000
 5.497222222222222;0.0;0.0;1.7316666666666667;0.31222222222222223;0.03638888888888889;0.0;1583448300000""")
 
+# Csak hogy ne kelljen fájlt olvasni :)
 df=pd.read_csv(TESTDATA,sep=";",header='infer')
-df['m_timestamp']=pd.to_datetime(df['m_timestamp'],unit='ms')
-#df.set_index('m_timestamp',inplace=True)
-#ax=sns.barplot(data=df.T)
 
+# Konverzio Epoch-> Loal time
+df['m_timestamp']=pd.to_datetime(df['m_timestamp'],unit='ms')
+df.m_timestamp = df.m_timestamp.dt.tz_localize('UTC').dt.tz_convert('Europe/Budapest')
+
+# Long format data-ra konvertál, azt jobban szereti az altaair
 df2=pd.melt(df,id_vars=['m_timestamp'],value_vars=["s_betap1","s_mikro1","s_teafozo","s_kavefozo","s_mikro2","s_bojler","s_mikro3"])
 #print(df2)
-#ax=sns.barplot(x="m_timestamp",y="value",hue="variable",data=df2)
-#plt.show()
 
-
+# Tényleges plot, kell az altair és a altair_viewer package
 import altair as alt
+from altair import datum
 
-fomero = alt.selection_multi(fields=["s_betap1"])
-almero= alt.selection_multi(fields=["s_mikro1","s_teafozo","s_kavefozo","s_mikro2","s_bojler","s_mikro3"])
-
+# Base-ből építkezik, itt kell az adatforrás, minde adattal
 base =  alt.Chart(df2).encode(
     x='m_timestamp')
+
+# Stacked bar: kell szűrés, hogy kivegyük a betápot
 bar=base.mark_bar().encode(
-    x='m_timestamp',
-    y='value',
+     y='value',
     color='variable',
 ).transform_filter(
-    almero
+    datum.variable != "s_betap1"
 )
 
+# Overlay grafikon a betápra, szintén szűrés
 line = base.mark_line(color='red').encode(
   y='value'
 ).transform_filter(
-    fomero
+    datum.variable == "s_betap1"
 )
 
-chart =(bar).properties(
-    width=1000,
-    height=1000
+# Csilivili: hagyja a scrollozást
+brush = alt.selection_interval(bind='scales',encodings=['x'])
+
+# Összerakja a line plot és a bar plot összegeként a chartot
+chart =(bar+line).properties(
+    width=600,
+    height=600
+).add_selection(
+    brush
 ).interactive()
+
+# Böngésző ablakban feldobja
 chart.show()
-# load a simple dataset as a pandas DataFrame
-# chart = alt.Chart(df2).mark_bar().encode(
-#     x='m_timestamp',
-#     y='value',
-#     color='variable',
-# ).properties(
-#     width=1000,
-#     height=1000
-# ).interactive()
-# chart.show()
